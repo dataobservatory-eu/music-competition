@@ -1,7 +1,7 @@
 --- 
 title: "An Empirical Analysis of Music Streaming Volumes, Revenues and Their Market Conditions"
 author: "Daniel Antal, CFA"
-date: "2022-01-30"
+date: "2022-02-02"
 site: bookdown::bookdown_site
 documentclass: book
 lof: yes
