@@ -1,0 +1,5 @@
+book_filename: "DMO_Competition_Working_Paper"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapter "
