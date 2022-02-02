@@ -1,5 +1,6 @@
 #Exclude final book
 _book/
+_bookdown_files/
 
 # History files
 .Rhistory
