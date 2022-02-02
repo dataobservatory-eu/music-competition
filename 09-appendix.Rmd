@@ -1,0 +1,10 @@
+# Appendix {-}
+
+## Technical Notes {-}
+
+The simulations were made in the R language [@R-base] using the *Tidyverse* packages [@tidyverse2019] of *dplyr*, *tidyr* and *purrr* [@R-dplyr; @R-tidyr; @R-purrr] for data processing and *kableExtra* for the tables [@R-kableExtra]. 
+
+For visualisation, *ggplot2* and *scales* was used [@R-ggplot2; @R-scales] . The document was compiled with *rmarkdown*, *bookdown* and *knitr* [@rmarkdown2018; @R-bookdown; @R-knitr]. 
+
+## Acknowledgements {-}
+

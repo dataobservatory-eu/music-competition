@@ -1,0 +1,219 @@
+# Price Disintegration: Timeframe and Functional Currency Problems {#simulation-results}
+
+## Timeframe of analysis
+Most works and recordings are used in any earnings period. In the case of certain rights, such a public performance rights in television or radio, retransmission rights, royalties are accumulated throughout a year, and paid out once. In music streaming services, some pay-outs are accumulated during a calendar month, others throughout a year or multiple years (particularly collectively managed composer rights in some jurisdictions.) Because some earned royalties are very small, royalty management organizations do not pay out but accumulate earnings where money transfer and accounting costs would be larger or would take most of the payout.
+
+In our case study we chose to compare the comparison of annual revenues, bearing in mind that this may lead to smaller or greater inconsistencies, particularly in cases when royalties are paid once in lump sum. A more precise valuation would require many years of historical data that is not available in the Slovak Republic.
+
+As we have experienced during the creation of the CI-CEEMID indices, most recordings' typical (median) earning over a single royalty payment cycle (a calendar month) is zero. But it is certainly not zero during the entire lifespan of the recording, and it is usually not zero for the first or second year. The choice of the timeframe for empirical observation is critical.
+
+Various licensed uses of music have three royatly payment cycles. Mechanical royalties are paid once in a lifetime. Public performance royalties are collected on an annual basis, and small earnings (that would be too costly to pay out during the year) are accumulated over two or more years. Streaming earnings are paid out monthly, but similarly to public performance royalties, small amounts are accumulated over two or more periods. Observing royalty statements alone cannot enable meaningful comparisons, because the same payouts on a given date--for example, 30 April 2020--refer to different earning periods.
+
+Periodical earnings often do not reflect accrued but unpaid royalties, which may affect a very large number of rightsholders, given that the earnings in the long tail are smaller than the accounting and bank transfer cost. These accrued earnings are not always lost, and often carried over to the next period when the payment, after payment costs, is practical. It is very easy to significantly underestimate the payouts *in the long tail*, because their *payment frequency is lower than among successful artists*.
+
+The different timeframes of various royalty collections has another impact on the analysis: different royalty cash flows are subject to different currency exchange rates. Two, seemingly equal royalty payments may veil a different quantity or price by an offsetting currency movement.
+
+Our simulations use the CI-CEEMID index as starting points and create hypothetical songs that behave similarly to the ‘median’ and ‘successful’ songs. We will expose these hypothetical songs to various genre-, exchange-rate, and other economic scenarios. We will create about 10,000 simulated songs to show why their earnings are so vastly different. Our simulated songs are not actual songs, but they very much resemble a realistic song. The changes in the streaming market environment are either historically recorded changes, or realistically changed simulations (for example, recasting historic exchange rate scenarios.)
+
+1.	In subchapter \@ref(difference-popularity) we simulate earnings for recordings with different popularities. We create random, but markedly different song audience build-up profiles (quick hits, perennial hits, etc.)
+
+3.	In subchapter \@ref(release-time) we simulate the effect of different release dates, for example March 2019 and January 2017.
+
+4.	Random, but realistic market shares among six countries (the addition of more countries would not give more insights) are presented in subchapter \@ref(difference-international).
+
+5.	The effect of different exchange rates is simulated in subchapter \@ref(exchange-rate-effects) for five countries---both using historical exchange rates, and realistic, hypothetical, alternative scenarios.
+
+We show that two identically popular songs released in the same month and with the same number of fans in each country but with different price levels and subject to different exposure to external economic factors can have 30% more or less revenue on the same number of streams. If we consider market share differences between the UK home market and abroad, the differences will be even bigger.
+
+## Different Popularity {#difference-popularity}
+
+We generated realistic streaming volume profiles for smaller and larger bands.  We follow them for 60 periods (5 years), but most of them, like real songs, make 95-99% of their revenues in the first 1-3 years.  
+
+```{r pouplarity-sim, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Simulated Songs With Various Levels of Popularity",  fig.align='center'}
+load( file.path("plots", "revenue_scenarios.rda") )
+load ( file.path("plots", "simulation_example_plots.rda") )
+load ( file.path("plots", "exchange_rate_plots.rda") )
+plot (stream_example_release_1_plot)
+```
+
+This means that the average `monthly 100 streams` on a song (6000 over 60 periods) can be much higher, around 1000 in the first month, and very low, as calculated by the CEEMID-CI medium volume index, afterwards. Our scenarios are a bit too optimistic: while we know that most songs tend to have 0 streams per months in the long-tail, we gave them the CEEMID-CI medium volume value (1-9 streams), which is a slight overestimation. In the way in which the CEEMID-CI index is constructed, these values are calculated only from songs that were streamed at all – and many songs that were used to construe the index value in period 2 may have fallen out from the index (in the absence of streams) in period 3. Any song that reached consistently the level of the CEEMID-CI Medium Volume index is far more successful than the half of the entire observed universe. Yet, we are talking about a penny over a year, so this “optimistic” view does not really alter our conclusions. Rather, it further highlights the fact that most songs do not earn anyway a single penny in a typical month.
+
+So, our popularity level `monthly 100 streams` distributes 6000 streams over 60 periods. Another popularity level of `monthly 10000 streams` distributes 600000 streams over 60 periods in various scenarios usually following the density function. In fact, for discrete time periods, the histogram of left-skewed lognormal pseudo-random numbers repeated 6000-6000000 times. 
+
+- Quick hits reach their peak audience (1000, 10000,100000 streams per year) in a territory in 1-3 months.
+
+- Slowly building hits reach their peak audience in a territory in 3-12 months.
+
+- Perennial hits have a stable audience. 
+
+Our songs have random streams in each territory following various lognormal distribution density functions, rounded to 0 decimal points. (There are no 1.5 streams, only 1 or 2 streams.) 
+
+revenue~1~ = x~1~ \* p~1~ 
+
+revenue~2~ = x~2~ \* p~2~
+
+If we place the annual revenue of the first 1..12 periods into the matrix *X*, then the annual revenue will be 
+
+revenue  = X \* p
+
+
+
+```{r revenue-table-1, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Various Revenue Equity Measures for Random Songs Released on the First Period",  fig.align='center' }
+revenue_table_1 <-  sum_table_revenues_domestic_1 %>%
+  kbl( align = "c", digits = 3, 
+       col.names = c("popularity", "release period", "mean", 
+                     "median", "max", "min", "range", 
+                     "rel. range", "stdev") ) %>%
+  kable_classic(full_width = F) %>%
+  add_header_above(c(" " = 2, "Earning Level" = 2, "Earning Differences" = 5)) %>%
+    column_spec(1, bold = T, border_right = F) %>%
+    column_spec(2,  border_right = T) %>%
+    column_spec(4,  border_right = T) 
+
+if ( knitr::pandoc_to("docx") ) {
+   revenue_table_1 %>% as_image()
+    
+} else if ( knitr::is_latex_output() ) {
+    revenue_table_1
+} else {
+      revenue_table_1 %>%
+        footnote(general = "Based on the CEEMID-CI median value streaming indexes and simulation.\n\ua9 Daniel Antal, music.dataobservatory.eu 2021.") 
+    }
+    
+```
+
+In our hypothetical scenario, within the different popularity ranges there were 10.2-14.6% _justified differences_ in the first-year earnings in the United Kingdom. These values are lower than the observed 28% variability in streaming values–--the maximum possible difference would have been observed between two unrealistic hypothetical song: one that only had an audience in the best paid, and the other in the worst paid month. Just within the UK, not counting export revenues from foreign countries, a difference in the value of 1000 streams on the level of 10-14% is perfectly normal due to the fluctuation of monthly streaming prices.
+
+## Effect of Release Time {#release-time}
+
+We simulated the effect of different release times with filling up the revenues of our hypothetical songs with 1-25 zero values; they started their 60 simulated periods in period 1, 2, … 25.  We used this perfectly realistic simulation to show that new releases in the period 2016-2019 were released in different (and deteriorating) environments.  Songs released in 2019 were competing for a far bigger and diverse audience, and with far more songs than songs released in 2016.  One of the biggest _justified difference_ among righsholders is the release time of their work or recording.
+
+```{r release-sim, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Simulated Songs with Various Popularities and Release Dates"}
+plot(stream_example_release_all_plot)
+```
+
+As more and more users are joining the streaming markets, and the services are available on newer and newer territories, competition is increasing on the platforms. For example, with licensing to India, potentially hundreds of millions of users emerged who have a distinctly different taste from Northern American or European audiences’ tastes. This motivates rightsholders of Indian music to start distributing their new and back catalogue even more in the platforms. The increasing competition leads to a lower likelihood of a song being selected by playlists or users, and because both user tastes and available catalogue is getting more heterogeneous. Furthermore, as all the rich markets are already licensed, new users are entering the system at far lower subscription fees and per stream revenues.
+
+```{r streaming-price-difference,  fig.cap="Streaming Price Differences in the UK and Select Countries Over Time in the CEEMID-CI Index, Graphic Presentation"}
+plot (price_distribution_plot)
+```
+
+We see a short, transitory period in new markets when only a small number of early users subscribe, typically from the local upper middle class, and music that fits into those local tastes achieves sometimes higher revenues per stream than in the UK. These may be caused by the way licensing agreements are constructed, and initial or minimal payouts are defined. But these opportunities are very short-lived and available for a very limited number of rightsholders. 
+
+The \@ref(fig:streaming-price-difference) shows that the price difference over time is relatively small in Germany and the United Kingdom, but quiet widespread in the emerging market of Lithuania. In this dynamic environment, when a song is released is not a matter of indifference. We will simulate this with placing our hypothetical, randomly generated, but realistic stream counts in different times into the model. A hypothetical song released in December 2017 has a very different market environment in the first critical months than another one in March 2019. 
+
+Our model is extended with the release date, which will be one of the 1 ... 25 periods of the indexed period. For a song that is released in the first known period the first annual revenue is
+
+revenue~1~ = x~1~ \* p~1~ 
+
+...
+
+revenue~12~ = x~12~ \* p~12~
+
+and for a song released in the 15th period, the first annual revenue will be the sum of
+
+revenue~15~ = x~15~ \* p~15~ 
+
+...
+
+revenue~26~ = x~26~ \* p~26~
+
+Taking only British streaming prices into consideration, the later the release date, the less is the revenue on a similarly popular song.
+
+```{r release-date-effect, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Effect of Release Date on Revenues"}
+plot(revenue_release_day_uk_plot )
+```
+
+In the UK, the observed typical prices had a 29% range: this is the 'worst case scenario' difference in the observed period between revenues on the same number of streams. In reality, extreme low and high prices do not last long, and any rightsholder whose song was in use for several months could expect a smaller variability. But regardless of popularity, we can clearly see on the Chart \@ref(fig:release-date-effect) that songs released later could expect a lower return on the same number of streams across popularity categories.
+
+```{r price-differences, results='asis', fig.cap="Streaming Price Differences in the UK and Select Countries, Tabular Presentation"}
+
+price_diff_table <- country_price_summary %>%
+  kbl( align = "c", digits = 3, 
+       col.names = c("country", "mean", "sdev", "range", "absolute deviation %") ) %>%
+  kable_classic(full_width = F) %>%
+  add_header_above(c(" " = 1, "Revenue" = 1, "Risk" = 3)) %>%
+    column_spec(1, bold = T, border_right = T) %>%
+    row_spec(1, bold = T, color = "white", background = "#DB001C") 
+if ( knitr::pandoc_to("docx") ) {
+   price_diff_table %>% as_image() 
+} else if ( knitr::is_latex_output()) {
+    price_diff_table
+} else {
+    price_diff_table %>%
+        footnote(general = "Based on the CEEMID-CI median value and median volume streaming indexes.\n\ua9 Daniel Antal, music.dataobservatory.eu 2021.")
+}  
+```
+
+The UK in this example is a high-return, low-risk country.  We have seen temporarily higher prices in some emerging markets---we believe these are temporary anomalies, related to minimum licensing fees, and lack of competition. (During the observation period, often only Deezer was present in the emerging markets, and was distributed in special packages together with telecom companies.) Among the mature markets, only the German market was less risky than the British one.
+
+## International Competitiveness {#difference-international}
+
+Our simulation contains realistic scenarios about earnings in a few advanced and emerging markets besides the UK. While we only simulate results only in a few select countries, we do not believe that a global model would add a lot more insight into our report. The differences in earning potentials among rich markets is not that great, and rightsholders who have a large audience in the United States or other markets can expect similar results. We want to keep our example traceable, and we want to work with a limited number of exchange rates. 
+If we compare the following table with the price differences in \@ref(release-time), we will realize that the exchange rate changes in the last 8 years were as great, or even greater as the streaming price change *within the UK*.  If a British rightsholder had significant audience in Eastern European emerging markets, the price changes could have been greater than within the UK *only because of the exchange rate risk*. The exchange rate risk against rich, advanced markets in the Eurozone and Switzerland was around the same magnitude as the price variability in the UK.
+
+```{r fx-differences, results='asis', fig.cap="Streaming Price Differences in the UK and Select Countries, Tabular Presentation"}
+current_rate_table <- currency_rate_summary %>%
+  kbl( align = "c", digits = 3, 
+       col.names = c("country", "mean", "sdev", 
+                     "range", "absolute deviation %") ) %>%
+  kable_classic(full_width = F) %>%
+  add_header_above(c(" " = 1, "Revenue" = 1, "Risk" = 3)) %>%
+    column_spec(1, bold = T, border_right = T) %>%
+    row_spec(6, bold = T, color = "black", background = "#e5e5e5") 
+
+if ( knitr::pandoc_to("docx") ) {
+   current_rate_table %>% 
+        as_image() 
+    }  else if ( knitr::is_latex_output()) {
+    current_rate_table
+} else {
+    price_diff_table %>%
+        footnote(general = "Based on the CEEMID-CI median value and median volume streaming indexes.\n\ua9 Daniel Antal, music.dataobservatory.eu 2021.")
+}  
+
+```
+
+The exchange rate risk and the foreign streaming price risk, depending on the risk metric used is multiplicative or additive. The absolute price changes in the European markets were about 30-80% in the streaming period, and the exchange rate movements add about another 30%. In the indexed, post-Brexit period the pound was devaluing, while the streaming prices were decreasing. This means that the systematic devaluation of the British pound shielded from about 1/3 of the negative export price changes in Europe. (Systematically, similar effects were felt in the American and Japanese markets, but with different variability.) 
+
+Our hypothetical artists have a random market share in the UK, Germany, the Netherlands, Switzerland, Czechia, Hungary (We chose CH, CZ and HU because of their different currencies, the CHF, CZK and HUF.)  These are relevant scenarios for the British music industry, which is a global leader. British labels and publishers often sign Dutch artists, for example, who have a larger market in the Netherlands than in the UK. Or, in some of our scenarios, a mainly British rightsholder has a significant fan base in Poland and Hungary. These are all plausible scenarios, but of course, for smaller British labels and artists who do not have a large following abroad, those cases are more interesting where the large majority of the income, say, at least 80% is arriving from the UK.
+
+For the British music industry, the use of the English language is an international competitive advantage in most genres. (Of course, this is not the case with authentic Sami folk or classical music, or instrumental genres.)  While a Hungarian-language song will hardly find place on a playlist outside of Hungarian-speakers, who are a very small minority in the United Kingdom, English-language music is dominant on the Hungarian market.
+
+```{r release-international, echo=FALSE, fig.cap="Effect of International Diversification on Revenues, Side-by-Side Comparison", messages=FALSE, warning=FALSE, fig.align='center'}
+knitr::include_graphics(file.path("plots", "Effect_International_Diversification_Revenues_Coplot.png"))
+```
+
+
+The point we are making here is that artists who are competitive in the rich markets (and the UK is one of them) have better earnings prospects than artists who are focused on emerging or future markets. We simulated this by creating hypothetical divisions of 100% of the plays between six markets: GB, CH, DE, NL, CZ, HU. This way we can show that it does matter where a rightsholder's music is played, as well as the actual exchange rate.
+
+```{r int-div-rev,echo=FALSE, message=FALSE, warning=FALSE,  fig.cap="Effects of International Diversification on Revenues", fig.align='center'}
+plot(effect_int_rev_plot)
+```
+
+The British market is a relatively high value market, and in our simulated portfolios the international diversification (on the same number of streams) always reduced the average or the typical (median) income and brought the best and worst performance down (See Fig.  \@ref(fig:int-div-rev)). If a rightsholder had 1000, 10000 or a million streams, it was better to have it in the UK market than in the other markets.
+
+```{r int-div-risk, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Effects of International Diversification on Risk Metrics",  fig.align='center'}
+plot(effect_int_risk_plot)
+```
+
+The returns on the same number of streams steadily decreased (see Fig.  \@ref(fig:int-div-rev)), because, as we have seen in the \@ref(streaming-price) [CEEMID-CI Streaming Price Index](#streaming-price), the prices have been decreasing over the period. 
+
+However, as expected, international exposure reduced all risk metrics somewhat. Not only did diversification reduce the absolute and standard deviation of a song’s revenues, but the foreign markets performed slightly better, and the general decrease on unit price was lower on the same portfolio. Next, we examine the contribution of the devaluation of the GBP in the period against most currencies.   
+
+## Exchange Rate Effects {#exchange-rate-effects}
+
+We are going to present earnings in GBP. However, foreign earnings are not made in GBP. When the GBP depreciates, and loses 10% of its value against the CZK, then Czech streams, ceteris paribus, bring in 10% more GBP revenues. The Czech streams are paid from Czech subscriber revenues made in Czech korunas. However, when the GBP appreciates in value against the euro by 10%, British rightsholders immediately lose 10% in GBP terms, because they must buy more expensive pounds as they convert back their German or Dutch revenues. 
+
+```{r currency-environment, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.cap="Select Exchange Rates During the CEEMID-CI Index Period"}
+load ( file = file.path("plots", "exchange_rate_plots.rda") )
+plot(currency_rate_environment_plot )
+```
+
+During our observation period, i.e. the CEEMID-CI Index period, the British pound was systematically depreciating (see Fig. \@ref(fig:currency-environment)), but of course, all national currencies had their own movements. The Swiss Frank and the Hungarian Forint had depreciation periods against main currencies, including the British pound; in the latter part of the index period, the GBP was appreciating against the CHF and the HUF.
+
+The depreciation trend helped British artists during this period, and contributed to a great effect on the risk reduction and revenue loss in the portfolios of internationally competitive rightholder assets. The depreciation means that more pounds are given for an EUR or CZK stream revenue. Such trends never last forever -- exchange rates do have a strong mean-reversion characteristic. With index values for the years 2020 and 2021, we would certainly see a diminishing value of Hungarian streams, and rather great fluctuation in the value of Swiss streams, for example. 
+
+We want to show that much of the inequality in GBP earnings is related to exchange rate fluctuation. To stay with this example, when the GBP loses value against the CZK, artists with a Czech fan base win money immediately. When the GBP gains value against the euro, artists with a European (Eurozone-based) fan base lose income in GBP terms, of course, not only in Germany and the Netherlands, but also in further 17 Eurozone countries, and in Montenegro and Kosovo, too, which use the euro unilaterally.
+
+To show the extent of this factor, we created hypothetical but realistic scenarios for our simulated repertoire.  Besides using the actual exchange rate used to convert the revenues in the CI-CEEMID index, we used fictitious exchanges rates, too. These rates were simply exchange rates from a varying number of months before or after the actual payout. In this way we created fictitious exchange rate paths that were realistic, because they happened before or after the true payouts. These exchange rate scenarios therefore have a realistic volatility, mean, and median value.
