@@ -1,0 +1,826 @@
+--- 
+title: "An Empirical Analysis of Music Streaming Volumes, Revenues and Their Market Conditions"
+author: "Daniel Antal, CFA"
+date: "2022-02-02"
+site: bookdown::bookdown_site
+documentclass: book
+lof: yes
+classoption: openany, a4paper, oneside
+papersize: a4
+geometry: left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm
+bibliography:
+- book.bib
+- antal.bib
+- dcms.bib
+- competition.bib
+- datainteroperability.bib
+- valuation.bib
+- ccipolicy.bib
+- contentregulation.bib
+- caselaw.bib
+- eulaw.bib
+- musicindustry.bib
+- musicology.bib
+- packages.bib
+- statsoftware.bib
+- statisticalmethodology.bib
+- youtube.bib
+- musiceducation.bib
+- openscience.bib
+- opa.bib
+- rpackages.bib
+biblio-style: apalike
+linestretch: 1.1
+urlcolor: blue
+linkcolor: blue
+link-citations: yes
+nocite: |
+  @R-bookdown, @R-ggplot2, @R-kntir, @puca_intangible_2019
+description: A re-edition of the research document provided for the Music Creators' Earnings Project commissioned by the UK Intellectual Property Office.
+---
+
+# Executive Summary {-}
+
+> Do not use or cite this report yet.  It is a preliminary document based on [An Empirical Analysis of Music Streaming Revenues and Their Distribution](https://reprex.nl/publication/mce_empirical_streaming_2021/) and will go through a very thorough re-editing, leaving irrelevant parts out, and adding more relevant parts from a competition economics and competition law point of view [@antal_mce_2021].
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warnings=FALSE, out.width ='80%', fig.align='center')
+library(kableExtra); 
+library(knitr); library(ggplot2); library(scales); library(dplyr); library(tidyr)
+library(webshot)
+library(here)
+here::here()
+```
+
+
+It is impossible to understand music streaming earnings outside the context of the music market or the music business ecosystem. Music streaming royalty rates and distribution methods largely follow long-established practices and regulations concerning valuing intellectual property, accounting for royalties, and regulating the administration of copyrights and neighbouring rights. Music streaming competes with other uses, such as public performances in television and radio broadcasting, or digital downloads. Music streaming cannot be analysed in isolation from the volume and price trends of public performance, mechanical licensing, and home copying.
+
+Regarding the key questions, the CMA *Music and streaming market study* must have a working definition of the relevant market under scrutiny, both in the sense of the product/service offered and the geographical scope of the market [@cma_market_study_scope_2022]. As various inquiries of other antitrust authorities into music have shown, neither question is very straightforward. The music industry is both very local and global at the same time. Most music creators and music creators have mainly sub-national markets, but certain market practices, model contracts and distribution services follow a global practice, global standards or even global agreements. Whilst raising the issue of the relevant market may appear legalistic and perfectionalist, in fact, the lack of a strong working definition of the relevant market makes empirical observation next to impossible.
+
+Our **Working Paper** lays out some empirical observation and estimation strategies developed in the market analysis of several music markets, in two cases, related to the application of European competition law. We show that it is very difficult to collect reliable price and quantity data for the analysis of a national market.  The CMA market study will face many significant estimation challenges that we had to cope during similar studies in other countries.  It is very critical to have a very precise market definition, both in geographical and product sense, to start the collection of empirical data that relates to the correct geographic concept and the correct parts of the value chain. 
+
+The second part of our **working paper** addresses too important questions in detail, that we only summarize now.  The music industry traditionally reports aggregated revenues, without quantity or concentration measures, which gives very little information for an economic assessment. The break up the revenues to prices and quantities, the basic variables of any economic analysis, we need to correctly collect and disintegrate data from the truly relevant market. We introduce our *full market comparator* model, which is essential a price setting tool for the music industry, but in this case, it can be also used the other way around: to see if prices are sufficiently homogeneous in the market definition applied by the scoping report. In the second part, we show how difficult it is to disintegrate the volume, price, and currency rate effects of streaming data.  If the CMA want to create a study on the UK market, and not the global market, this will be a critical task. Not only the national/domestic separation of the data, but the domestic/export separation of the data is difficult in practice. Our **simulation results** that after the cleaning of the exchange rate effect in the data how shockingly different picture emerges about the UK music streaming markets.
+
+## The relevant product market {.unnumbered}
+
+The music value chain model employed in the scoping report is an extremely simplified version of the traditionally used music value chain models for the United States [@hull_music_2011] later adopted to Europe [@leurdijk_statistical_2012-1; @leurdijk_statistical_2012]. A more extended view of the value chain reveals that some elements of the value chain are open to competition on a sub-national level, others are on a national level, and others on an international, perhaps even global level. Because of the narrow and simplistic value chain applied by the DCSM committee and the [Intellectual Property Office](https://www.gov.uk/government/organisations/intellectual-property-office) as a starting point, which are recognized inputs of the SMA *scoping paper*, the weight of streaming appears to be very high.  But it is questionable that streaming really dominates the music ecosystem.
+
+If the CMA believes that the relevant product market is music streaming, and not music, or at least recorded music, then it must assume tacitly that the undertakings in music streaming can act in relative independence form other parts of the music industry, for example, from broadcast music, the sale of physical formats, or even live music. This is a questionable starting. First, our data in other countries (employing the full market comparator model) found contrary evidence, second, because music is licensed similarly in music streaming and broadcasting/transmission and dissimilarly in UUC. Current price setting practices, at least, known to us, do not set streaming prices fully independently of the broader recorded industry, with the exception of UUC.
+
+Our Digital Music Observatory has been a proponent of making the market analysis internationally comparable and transparent.  The Digital Music Observatory full-market model on the volume side is based on the statistical standards [@frank_guy_essnet-culture_2012] and IFRS Fair Value standards [@ifrs_fair_value_2011; @commission_regulation_2012_1255]. Its understanding of price (which often cannot be directly observed, only calculated from revenues and volumes) was partly based on _Valuing the use of recorded music_, an excellent methodological guide created by PriceWaterhouseCoopers for IFPI [@pwc_valuing_2008], and the various globally applicable WIPO and IFRS standards [@ifrs_fair_value_2011; @flignor_orozco_ip_valuation_2006; @puca_intangible_2019] on valuing copyrights in more practical terms for the music industry.  
+
+```{r fullmarket, include=FALSE, fig.cap="A simplified introduction of our understanding of licensed and not-licensed uses of music in various European countries."}
+knitr::include_graphics(file.path("plots", "full_market_example.jpg"))
+```
+
+At least in the markets analysed with this comprehensive tool originally developed for price setting in music markets, and took prices and quantities, harmonized to the same units, we would not subscribe to the market definition of the CMA Scoping Report.  What we have found in Hungary (repeatedly in several years) is that music streaming was more closely resembling the broadcasting and retransmission segment than the UUC segment.  This empirical observation can be well explained with the underlying regulation: in broadcasting/retransmission and music streaming the music is licensed, following the fair valuation standards and intellectual property standards.  In the observed period, UUC was not licensed in this sense, and as the scoping report correctly states, its prices are ex post set. 
+
+To assess whether the market definition is correct, the starting point is usually test for the homogeneity of prices. As our case study shows that employing a national market view is well-founded both empirically (UK streaming prices differ greatly from other European prices) and they can be well explained by the underlying regulations governing royalties, i.e., the various intellectual property accounting and pricing standards set by IFRS, WIPO, and to a certain extent, the international copyright law concerning equitable remuneration.  We also show in our **working paper** that observing the UK market is still very challenging. Most of the market players are SMEs without sophisticated business management, accounting systems, and it is very difficult to correctly delineate their domestic and export revenues, or to correctly attribute them to a financial year, or to compare their differently priced, quoted, collected revenues. 
+
+However, when analysing the product/service market, comparing prices is a huge undertaking.  We have done this in Hungary, Slovakia, and Croatia, partly in connection to applying competition law. We will show a slightly stylized version of our full market comparator model for Hungary, where some business confidential inputs will change by random numbers that leaves the actual model resemble the actual, but not public outcome, which is subject an antitrust dispute. 
+
+We find it questionable both from a regulatory and economic point of view that scoping report includes UUC in the broader music streaming umbrella, but excludes public performance licensing, particulary in radio and televion broadcasting and retransmission. The analysis we have carried out in other jurisdictions showed that UUC overtook music streaming and often came close to the radio broadcasting exactly because it operated in a vastly different market environment. As the scoping report correctly acknowledged, UUC companies sought ex post agreement (pending non-take-down) from rightsholders based on ex post offered prices. In our analysis outside the UK such prices were at least 90% lower than music streaming or radio broadcast prices. In the previous decade, the various representative associations of composers [@gesac_regulatory_2015; @gesac_copyright_2015; @cisac_cisac_2017], performers [@aepo-artis_give_2016; @aepo-artis_comments_2017], and producers [@moore_value_2016] in Europe were all strongly calling for a change in these practices which were made, technically at least, illegal for the next decade.  
+
+A re-regulation of UUC in the European Union is under way with the recent EU copyright directive [@eu_directive_2019_790], which, due to Brexit, is not applicable in the UK. The UK Intellectual Property Office is investigating to introduce on a separate legal basis in the UK, but there has not even been a proposal for this. In the UK, there is no regulatory mechanism that would bring the UUC segment closer to radio, retransmission and licensed streaming.
+
+Eventually, we believe that this question must be addressed with the analysis of prices.  We introduce in our **working paper** in detail the regulation and practice of music price setting.  In practice, we see a high level of alignment among the music broadcast and retransmission segment, and the licenses music streaming segments, and we have seen (non-public) documents indicating that the parties in these segments do consider each other as comparators in their pricing decisions.  However, at least in the jurisdictions (and relevant national markets) we have seen data, the UUC segment worked rather independently from both broadasting/retransmissionn and streaming, and applied completely dissimilar sales conditions.
+
+Overall, we would not use the current relevant product/market in the scoping report, instead, our initial hypotheses would be pair-wise comparison of the integration of the broadcasting/retransmission, the physical (mechanical licensing), and the licensed streaming and UUP segment.  We believe that music in the radio, in music televion, vinyl and CD, home copyied files, and streaming subscriptions and UUC are competing with each other.  In our experience, streaming has no dominant role, and probably not even a leading role in the consumers music use basket.
+
+
+
+## Assessing the geographical market definition {.unnumbered}
+
+We assume from the language of the scoping report that the DCSM’s working definition is that of a UK national relevant market. In our experience with competition law-based market analysis in other jurisdictions, this is indeed the best point of view, but only when a broader recorded music industry is considered. Nevertheless, we have experienced in the [Music Creator Earnings' Project](https://www.gov.uk/government/publications/music-creators-earnings-in-the-digital-era/) initiated by the UKIPO that currently the British music industry is so interwoven with the national music industry, that it is next to impossible to obtain relevant market figures for the United Kingdom alone. Our paper is based on a report that we made within the scope of this project, but which has only found a place in a single paragraph and a footnote of the *Music creators’ earnings in the digital era* report and was paid for but published as an accompanying document *independently* of the main report. We have shown that against the commonly held view that the music streaming brought growth back to (recorded) music, for most UK entities, revenues were flat at most in the period of 2015-2019, and even this was due to the depreciation of the GBP that inflated the dollar, euro, and yen based revenues.
+
+
+
+## Lack of market transparency {.unnumbered}
+
+
+When price, quantity, and revenue is correctly set, it is important to get a sense of their dynamic movement and their concentration.  Revenues in the music value chain are extremely concentrated, as it was shown in the xxxxx, and as we have seen in the analysis of other music markets.  Our price observations, which include the UK and 19 countries, albeit not perfect, suggest declining prices and a very high level of concentration. This leaves next to no revenue in very large segments of the market. Our hypothesis is that the median income for every copyright protected work or recording is zero for every single royalty payment period in streaming, and we suspect that even on rightsholder level, the median income is zero or close to zero.
+
+We have conducted various harmonized and representative surveys in several European countries to find out the revenues of rightsholders. Unfortunately, this was not possible in the xxxxxx, an the UK in Numbers survey offers very little comparison.  Yet, in other countries we would argue that in the recorded industry the growth is mainly extensive (new jurisdictions start to pay export revenues), and very uneven: some players growth, but the typical rightsholder is facing flat or diminishing revenues.  We observed a general devaluation of music in several markets, and our comparative data with the UK suggests that music is likely to be devaluing in the UK, too. This certainly has consumer benefits but combined with the vertical structure of music streaming configuration of the value chain, and the problems of UUC, these are not necessarily signs of a healthy competition. In fact, the heated policy debates around the re-regulation of streaming royalties, or in Europe, the re-definition of UUC show that many smaller market players find the current market situation unsustainable. 
+
+National and international music organizations are not equipped with the data processing and statistical capacity to do so, not to mention the typically micro- or small enterprise sized undertakings. This is the problem that the [Digital Music Observatory](https://music.dataobservatory.eu/), a working demo of the planned European Music Observatory is solving. It grew out of the Central & Eastern European Music Industry Databases (CEEMID) initiative in 2014, in which righthsolders from three countries attempted to solve this problem. By 2019, CEEMID had collected information on 20 European markets, including the United Kingdom, and processed data on far more markets---this data has been used in various competition law based analysis and modelling outside of the United Kingdom.
+
+The idea of this observatory was brought to the UK policy debate on music streaming by the observatory's only (former) British users, via the _Written evidence submitted by The state51 Music Group_ to the _Economics of music streaming review_ of the DCMS Committee [@dcms_state51_2020; @antal_ceereport_2020]. The *state51 music group*, through its distribution arm, has been supporting the creation of the largest ever European market report, the [Central European Music Industry Report](https://ceereport2020.ceemid.eu/), and supported the creation of the CEEMID-CI indexes, which, for the first time provided a stock-index type of view from an individual rightsholder’s perspective on volume and price movements in the UK and in other countries. The state51 music group drew attention to the observatory approach and this work in the *Digital, Culture, Media and Sport Committee* (DCMS) Select Committee of the British House of Commons. The MCE project first individually contacted the Digital Music Observatory (successor of CEEMID) and state51, and eventually with the permission of state51, the project commissioned this report, which re-uses the CEEMID-CI indexes. The MCE project also committed to share data in the Digital Music Observatory.
+
+While we collected limited data in the UK market in primary data collection, we have used the Open Data Directive of the EU, which under a different name (Reuse of Public Sector Information) has been in effect in the United Kingdom before Brexit, and we did obtain primary music use data from such sources (i.e., harmonized EU surveys.)  None of our evidence suggests that the UK music markets are very different from other developed European music markets.  It is very unlikely that the UK music streaming business is more independent of the broader recorded music industry then in Austria, Germany, or upper middle-income countries like Hungary, Slovakia, or Croatia.  In these countries, music streaming does not generate the biggest volume of uses, and in most countries, it also does not generate the biggest revenue of recorded music (radio does.) We believe that a more careful delination of domestic and export revenues for the UK music industry would also reveal that the CMA study is overweighting music and underweighting radio and televions broadcasting, and various forms of cable and satellite retransmission of music.
+
+<!--chapter:end:index.Rmd-->
+
+# Empirical Measurement Challenges {#intro}
+
+It is impossible to understand music streaming earnings outside the context of the music market or the music business ecosystem. Music streaming royalty rates and distribution methods largely follow long-established practices and regulations concerning valuing intellectual property, accounting for royalties, and regulating the administration of copyrights and neighbouring rights. Music streaming competes with other uses, such as public performances in television and radio broadcasting, or digital downloads. Music streaming cannot be analysed in isolation from the volume and price trends of public performance, mechanical licensing, and home copying.
+
+This working paper grew out of the analysis we have provided for the *Music Creator Earnings' Project*, hat created the Intellectual Property Office's [Music Creator Earnings' in the Digital Era](https://www.gov.uk/government/publications/music-creators-earnings-in-the-digital-era) report [@antal_mce_2021].  We were tasked with providing longitudinal analysis of earnings development and relating our findings to equitable remuneration. The starting point of our work was centred around a very broadly defined problem: how much money music creators (rightsholders) earn from streaming, how these earnings are distributed, and how the earnings and their distribution have developed during the last decade. We are reproducing some of our findings in this **working paper**, because they are related to the very same price and quantity movements that the CMA is investigating. 
+
+```{r packages, include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown', 'ggplot2', 'scales', 'dplyr', 'tidyr', 'tidyverse',  'ggplot2','stats', 'purrr', 'kableExtra', 'webshot' ), 'packages.bib')
+```
+
+The highly globalized music industry generates two important international reports, as well as several national reports, but these are not suitable for the analysis of the typical or average rightsholder, nor for small labels and publishers who do not represent a large and internationally diversified portfolio of music works or recordings. Copyright and neighboring right revenues are collected in national jurisdictions. Because BUS  artists are almost never constrained by their use of language, and the UK Music Industry is highly competitive in the global music markets, even relatively less known rightsholders earn revenues from dozens of national markets. The lack of market information on music sales volumes, prices for each jurisdiction, and the unaccounted for national, domestic, and foreign revenues makes the analysis of the rightholder’s earnings, or the economics of a certain distribution channel like music streaming or media platforms, impossible.
+
+The highly globalized music industry generates two important international reports: the *Global Collection Reports* of CISAC for the author/publishing side of the industry, and the *Global Music Report* of the IFPI, which reports the recording (producer) side of the industry. These reports are not suitable for an economic market analysis, because they do not contain prices and quantities, only aggregated revenues. There are many national market studies are available, but only few of them make an effort to quote volume or use data and price data.  CISAC and IFPI are global organizations, and their reports are based on an internal survey of their members. Most industry reports are member self-reported studies.
+
+The Hungarian, Slovak, and Croatian reports were based on independent market surveys [@antal_proart_2015; @antal_growth_2017; @antal_slovenskom_hudobnom_2019; @antal_pcr_croatia_2019].  They brought up many methodological challenges that a market study in the UK music industry must solve, too. Music organization usually do not possess the information that would be desirable for analysing the market from an economic point of view.  Surveying rightholders and users is very difficult, though, because neither rightsholder nor works or recordings have an authoritative description of their population. Only very advanced, inverse sampling techniques (which require very large amounts of data) can reveal price and volume movements when the analyst has no access to full transactional logs. 
+
+This is the problem that the [Digital Music Observatory](https://music.dataobservatory.eu/), a working demo of the European Music Observatory is solving. It grew out of the Central & Eastern European Music Industry Databases (CEEMID) initiative in 2014 [@artisjus_measuring_2014], in which righthsolders from three countries attempted to solve this problem. It was supposed to bring the seeminly data poor Central European countries to a level of data availability that allows better price setting or the creation of better creative industry policies or business strategies, but as experience showed, Western, more advanced, and future markets like Armenia share vey similar problems. The idea of CEEMID and later the Digital Music Observatory was to collect meaningful data that allows an economic analysis or economic valuation, i.e. it contains volume and price information.
+
+In 2019 Consolidated Independent (member of the state51 music group) teamed up with CEEMID to make a showcase for a permanent, harmonized, international data collection program. The [Central European Music Industry Report](https://ceereport2020.ceemid.eu/) was prepared with the help of 60 music organizations in 12 countries, including the United Kingdom, and analysed rightsholders earnings in various distribution channels, including, but not limited to streaming, in 20 markets. The idea of this observatory was brought to the UK policy debate on music streaming by the observatory's only (former) British users, via the _Written evidence submitted by The state51 Music Group_ to the _Economics of music streaming review_ of the DCMS Committee [@dcms_state51_2020; @antal_ceereport_2020].
+
+> "There are instructive initiatives in other industries in which there is perhaps a clearer and longer standing recognition of the role of economic analysis. This sometimes results in initiatives such as ‘Observatories’ like the European Market Observatory for Fisheries an Aquatorial Products or the European construction sector observatory […] These tend to be collaborative endeavours, with a varying mix of government, industry, economists and in some cases funding bodies. […] To date there have been few if any entities or initiatives for music similar to the above-mentioned observatories. We suggest this is something that policy makers can support and encourage, but which ultimately needs to be driven by the industry itself. […]
+This is one reason we have worked with the economist Daniel Antal and his team, in particular on the Central European Music Industry Report 2020. Economists such as Daniel Antal produce data about the music industry that is consistent with international statistical standards and adhere to rigorous data ethics principles, seeking external validation through data and code repositories for underlying data and methodologies."
+
+The data observatory concept is derived from Earth and natural sciences, where often many research stakeholders build large observation stations, such as the Hubble telescope in space, or CERN. Data observatories are often managed by a triangular stakeholder base of business, scientific, and policy stakeholders. The music industry requires a permanent market monitoring facility to win fights in competition tribunals, because it is increasingly disputing revenues with the world's biggest data owners.
+
+This was precisely the role of the former CEEMID  program, that was initiated by a few collective management societies after a dropped GESAC project. Starting out from three relatively data-poor countries, where data pooling allowed rightsholders to increase revenues, the CEEMID data collection program was extended by 2019 to 12 countries. It was eventually transformed into the [Demo Music Observatory](https://music.dataobservatory.eu/) in 2020 [@antal_launching_music_observatory_2021], which is now open for any national rightsholder, stakeholder organization or music research institute.  In the UK, the Music Creators’ Earnings project, which created the Intellectual Property Offices' [Music Creator Earnings' Earnings in the Digital Era](https://www.gov.uk/government/publications/music-creators-earnings-in-the-digital-era/) relied on our data, particularly, with the kind approval of Consolidated Independent, the (re-)publication of our price and volume indexes.
+
+Our working paper is divided into three subsequent chapters and conclusions.
+
+Chapter 2 is divided into four subchapters: 
+
+- \@ref(market-definition) introduces the considerations for defining the relevant product/service market after the consideration of the entire value chain of the music industry and the various problems related to defining the relevant market in terms of a national or global music market.
+- \@ref(estimating-volumes) introduces the problems of estimating the most basic economic variable, the quantity or volume of the music used in the market. 
+- Most publicly available information on music neither contains volumes or prices, we will investigate the possibility of observing or estimating prices in \@ref(estimating-prices). We show that because of the highly globalized nature of the music industry, a very careful attention must be paid to understanding the [functional currency](#functional-currency) used by entities in the market to report revenues (See \@ref(functional-currency)).
+- \@ref(estimation-strategies) then overviews the potential empirical data sources and empirical [estimation strategies](#estimation-strategies) for obtaining quantity and price information for the relevant product/service market, from a relevant geographical segment, for an evidence-based market analysis.
+
+Chapter \@ref(price-valuation) on [Price Harmonization and Valuation](#price-valuation) chapter deals with the price setting standards of the music industry, and the difficulties of price comparison in the various licensing modes of the industry. 
+- In \@ref(fair-value) [Fair Value](#fair-value) we argue that from an economic point of view, the IFRS and WIPO standards on the fair valuation of intangible assets, including copyrights and neighboring rights, are practically more important for a market analysis, then the issue of [equitable remuneration](#equitable-remuneration)---and we believe that in the policy debate often these terms are used in confusion. 
+- Then we introduce the problems of value transfer to [unlicensed platforms](#unlicensed) and we make the case that music streaming and UUC should not be treated as one market segment. 
+
+Chapter \ref(simulation-results) contains simulation results that we prepared for the [Music Creator Earnings' Project](https://www.gov.uk/government/publications/music-creators-earnings-in-the-digital-era), however, they are even more useful for a competition analysis. 
+- Our analysis shows that in many streaming markets, rightsholders, expressed in British pounds, experienced flat earnings, which was by a large extent due to the benevolent USD/GBP, EUR/GBP, and CHF/GBP exchange rates. It is likely that the majority of individual rightsholders experienced flat or diminishing revenues, and later releases brought less and less revenue per a thousand streams. A less benevolent exchange rate environment could have brought very large losses of revenue (See \@ref(exchange-rate-effects) for more details.)
+- Our computer simulations show that UK rightsholders are experiencing a rather varied picture of music streaming. Because of the generally falling value of streams, short-lived hits are more impacted by value decline than perennial hits (See subchapters \@ref(difference-popularity) and \@ref(release-time).) Rightsholders with a diversified international audience are partly shielded by these effects (See \@ref(difference-international).) Younger stars and new genres generally experience a windfall from the pro-rata distribution system and older artists with more conventional genres such as rock or blues are experiencing headwinds. The publicly available market totals are hiding completely different market experiences.
+
+Our report highlights some important lessons. First, we show that in the era of global music sales platforms it is impossible to understand the economics of music streaming without international data harmonization and advanced surveying and sampling. Paradoxically, without careful adjustments for accruals, market shares in jurisdictions, and disaggregation of price and volume changes, the UK industry cannot analyze its own economics because of its high level of integration to the global music economy. Furthermore, the replacement of former public performances, mechanical licensing, and private copying remunerations (which has been available for British rightsholders in their European markets for decades) with less valuable streaming licenses has left many rightsholders poorer. Making adjustments on the distribution system without modifying the definition of equitable remuneration rights or the pro-rata distribution scheme of streaming platforms opens up many conflicts while solving not enough fundamental problems.  Therefore, we suggest participation in international data harmonization and policy coordination to help regain the historical value of music.
+
+<!--chapter:end:01-intro.Rmd-->
+
+# Availability of Market Information {#empirical}
+
+There are very few public sources avaiable for a real economic analysis of the music sector, particularly in an international comparison or in a time-wise, longitudional comparison.  The global music industry has two well-known global reports: The Global Music Report of IFPI, which covers total revenues in almost all territories for producers and partly performers; and the CISAC Global Collections Report that contains total revenues from collectively managed author’s revenues. These reports were designed to set business targets for larger organizations, and they do not contain price or volume data, only revenue data, which allows very limited economic analysis. The more fragmented live music industry does not have any comprehensive global or European report. We also do not have a truly comprehensive report on global publisher revenues that are not collectively managed.
+
+Both organizations collect (rather different) international data which is only available to their members. Because CISAC had been earlier accused of price fixing, and made an agreement with the European Commission, the organization is particularly careful about even recording price data. IFPI has more comprehensive economic analysis, and in 2008 it even published a very useful pricing guide [@pwc_valuing_2008]. There are also national music industry reports available with variable depth of content and analysis, like the UK Music in Numbers series. These reports contain limited information for a thorough economic analysis or valuation, partly, because the conflicts of interests within the national music industries, for example, among publishers and producers, and producers and performers, do not allow the systematic collection and dissemination of such information. 
+
+## Market definition {#market-definition}
+
+In competition policy, a relevant market is a market in which a particular product or service is sold---an intersection of a relevant product market and a relevant geographic market. This concept is particularly useful in our case, because music has no clear-cut product, service, or geographical market.
+
+### Relevantproduct: the analysis of the value chain
+
+A relevant product market comprises all those products and/or services which are regarded as interchangeable or substitutable by the consumer by reason of the products' characteristics, their prices and their intended use---experience and research in other countries shows that music streaming can be substituted with other, differently licensed music, for example, listening to music via the media platform YouTube, or from mp3 files. Even the sale of physical music products, such as microcasettes and CDs, can be substituted with music services such as streaming subscriptions. 
+
+> missing 
+
+CEEMID has been mapping data sources for composer, producer and performer royalties, and other data sources since 2014, based on the standard mapping technique developed originally in the United States [@hull_music_2011] and later adopted to the EU [@leurdijk_statistical_2012-1; @leurdijk_statistical_2012]. To make specific---and confidential---analysis Artisjus and other collective rights holder representatives gave confidential data for this part of the calculation. For individually paid royalties, CEEMID used its own, 6th annual Music Professional Survey, which was conducted with 2065 musicians in twelve languages in 2019. CEEMID was turned into the [Digital Music Observatory](https://music.dataobservatory.eu/)---a modern, largely automated data observatory following the planned structure of the European Music Observatory---in 2020.
+
+> Missing info
+
+### Relevant geographical market {#relevant-geographical-market}
+A relevant geographic market comprises the area in which the firms concerned are involved in the supply of products or services and in which the conditions of competition are sufficiently homogeneous. Because recorded music creates royalties from copyrights and neighbouring rights defined by national copyright law, and, with some exceptions (for example, the BIEM agreements), are set nationally, the relevant market for analysis is the national market. British music is licensed in almost 200 jurisdictions, which makes the analysis of music creators' earnings particularly difficult. Yet, there are very few national (or domestic) data available on music sales volumes and sales prices, particularly in streaming. And the empirical observation, either via surveys, self-reporting, or via the observation of various royalty statements is very difficult, because the population of rightsholders, works and recordings is unknown, and representative sampling is difficult.
+
+While observing their global income is relatively easy, it tells us nothing about the economics of those earnings, i.e. the change of demand, supply, volumes, and prices. 
+Aggregated income indicators are usually made in two versions: national or domestic.  The national music creators' earning is the earning of rightsholders who live or are registered as legal persons in the United Kingdom. The domestic income of the music industry is the earning made by entities in the United Kingdom, including the earnings of non-resident rightsholders they represent. Because in most industry sources, the domestic and the national approach is not clearly delienated, it is very challenging to carry out a proper data analysis.
+
+Aggregated income indicators are usually made in two versions: national or domestic.  The national music creator earning is the earning of rightsholders who live or are registered as legal persons in the United Kingdom. The domestic income of the music industry is the earning made by entities in the United Kingdom, including the earnings of non-resident rightsholders they represent. The earnings of a French artist residing in the United Kingdom, represented by a French label, is likely to be counted in the British national earnings, but not in the domestic earnings of the UK music industry.  However, a Dutch artist residing in the Netherlands but represented by a UK label is likely reported in the domestic revenue of the UK music industry (and add value to the UK GDP.)
+
+Defining the geographical scope of the analysis is relatively easy in the case of live music, and rather complicated in the case of recorded music.  Because copyrights (and neighboring rights) are nationally granted on the basis of international treaties, rightsholders---via distributors or collective management socieites---collect their revenues from each copyright jurisdiction separately.  However, this information is often lost in surveys and global reports. In some cases, tying the revenues to a country, or even a region of a country is possible---this maybe possible in the case of radio revenues or royalties connected to live performances.
+
+The loss of information, as we will show in the next chapter, is critical, because volumes, prices and exchange rates move rather differently from the UK market in other countries. German revenues are driven by different volume growth rates, different local price fluctuations in the value of a stream, and by the EUR/GBR rate applied whenever a monthly or accrued royalty is paid. Because practically all stakeholders have non-UK revenues, without knowing how much they are affected by different international factors, they cannot know what steps in Britain can lead to a positive change in their visibility or income goals.
+
+The UK music industry is not constraint by language barriers, and most rightsholders receive income from dozens of territories or jurisdictions.  This means that British rightsholders collect from many jurisdictions, subject to various definitions of equitable remuneration, public performance, mechanical royalty regulations, and in many currencies. Because of the significant differences in streaming prices across the world, and the presence of currency rate fluctuations, a very large part, if not most of the income differences of rightsholders are caused by the different geography of their audience distribution.
+
+The Digital Music Observatory uses data from rightsholders directly, from collective management and distributors.  It is not always possible to break down the figures to national territories---for example, in the case of musician surveys, it would not be possible to ask musicians to break up their royalty statements when they self-report revenues.
+
+This is an important problem, because each artist, label, may have a different share of British, Irisih, American, German, and other income, and therefore their reported income may contain an unknown element of foreign income, and an unknown currency conversion effect.  For example, in the 2016-2020 period the British pound generally lost value against the euro, so a label or artists with flat revenues partly arriving from the eurozone could have seen a rising pound revenue. 
+
+The CEEMID-CI indices are denominated in British pound, and each revenue is exactly tied to a jurisdiction.  This cannot be said of self-reported surveys like that of the UK Music in Numbers, and we believe that there is no mechanism to prevent reports to IFPI to clearly delineate revenues per market. In the case of the CISAC Global Collection Report, we have a different problem: while we know that all reported income was generated in a particular national jurisdiciton, often a large share, even majority of those collections were made on behalf of foreign rightsholders.
+
+## Volumes {#estimating-volumes}
+The most notable problem for any economic analysis of the music sector is the lack of volume information for the most important uses: broadcasting and retransmission, and various forms of licensed and UUC streaming (mainly YouTube.) The public music industry sources do not contain the number of exploitations (uses), the hours of exploitation (uses), or even the number of users.
+
+Detailed volume data usually exists, though it is not always available from a central source.  Live music is collectively the biggest part of the music industry, but it is very fragmented, and with the exception of a few small and developed national markets, there are no real central ticketing services and central points of ticketing information.  However, because live performances in most cases exploit the music creator’s copyright (with the exception of early and classical music and authentic folk music that is not, or no longer subject to copyright protection), music performances are licensed by collective management organizations.  There is always a certain level of latency --- some shows go unreported ---, but such agencies usually have detailed volume information (number of events, their audience volumes, ticket prices or revenues, and even the actual works used for royalty payment.) 
+
+Similarly, the uses of recorded music in most cases has full transactional data.  Streaming providers pay by every single use, and mechanical licensing is based on the mechancical copies made (in the form of vinyl records, CDs, or downloadable files.) In some countries, broadcating and re-transmission has a full transactional log, in other cases, it has large use samples. 
+
+The Digital Music Observatory has been following the methodological guidlines of the former *ESSNet-Culture* statistical working group. These methods were synthetized from the best practices found by ESSNet-Culture, a working group set up by Eurostat and 15 member states' national statistical offices to measure cultural and creative industries. The ESSNet-Culture working group recommends the measurement of cultural access and participation (including market- and non-market forms) on the basis of the ICET model [@frank_guy_essnet-culture_2012, pp 237-239].
+
+- **I**nformation: to seek, collect and spread information on culture;
+- **C**ommunication and community: to interact with others on cultural issues and to participate in cultural networks;
+- **E**njoyment and expression: to enjoy exhibitions, art performances and other forms of cultural expression, to practice the arts for leisure, and to create online content;
+- **T**ransaction: to buy art and to buy or reserve tickets for shows.
+
+The ICET model is based on a long history of quantitative sociology and media research which has almost 50 years of research history. It is a well-established methodology. For more details on the ICET model and conducted cultural access and participation surveys with it see [@de_haan_virtuele_2008; @de_haan_nowadays_2012]. Following the ICET model, we created surveys that had been measuring the missing variables in a way that they could be related to transactions.  (The ICET abbreviation stands for information, communication, enjoyment and transactions.) 
+
+Rightsholders often have full or near-full transaction details for market-based cultural activities, such as sales of books or concert tickets. However, private copying is not a market-based activity, and there are no sales logs present. The problem with these data sources is that they are business confidential, fragmented, and they are lacking a common collection methodology.  
+
+
+It is possible to integrate this data (we will turn to this problem shortly), but often it is more useful to collect more aggregated forms of data. 
+To arrive to a common demoninator of users and uses, we have been calculating notional hours of music enjoyment in the forms of attending concerts, listening to radio or streaming services, or the respondents record collection. While self-reported surveys tend to be biased, they are consistently biased.  They may overstate the actual hours of use, as people like to report higher cultural participatoin than they actually engage in, but such data is not biased when expressed as the market share of radio transmission and licensed music streaming. 
+
+
+## Prices {#estimating-prices}
+Price information is always missing from the public music industry reports, and critically, in the absense of volume data, even price avarages cannot be calculated from total revenues.  Of course, the average price woudl be only a starting point in cases where the prices are not uniform.  As we will show, the prices are very stable in some forms, such as mechanical licensing (they are set by international agreements), somewhat variable in broadcasting and retransmission (they are changing annually) and they are fluctuating monthly in streaming.
+
+Price comparison is very difficult in the music sector because various forms of exploitation of the underlying copyright or neighboring right (the “revenue streams”) have different licensing and contracting models. The prices of mechanical reproduction, public performance and broadcasting/transmission are based on annual use and annual payments. Because some earned royalties are very small, royalty management organizations do not pay out but accumulate earnings where money transfer and accounting costs would be larger or would take most of the payout.
+
+The streaming licenses, which are usually make a form of a hybrid between a mechanical and public performance license, have a monthly payment schedule, but the revenues cannot be treated stricly monthly.  The typical revenues do not meet the monthly minimal payout tresholds---in fact, the typical (median) earning has been zero in the Consolidated Independent portfolio that was used for the xxxxx, and we believe that a larger portfolio that has more not actively distributed or promoted recordings have even larger payment lags. This means that without further data processing --- which can be a tedious task, as usually we have to deal with hundreds of millions of transactions stored in various royalty statement formats---, we cannot even correctly attribute the revenue to a financial year. 
+
+Price harmonization is a complicated task, and the the \@ref(price-valuation) [Price Harmonization and Valuation](#price-valuation) section of this paper expands this topic. 
+
+### Functional currency of the analysis {#functional-currency}
+
+Music is a global industry, and even less known artists or songs find occasionally international audience on streaming platforms.  This means that practically every British rightsholder has *some* revenues that are *not* originally denominated in British pounds. In the post-Brexit period, the British pound lost value against the US dollar and the euro, which means that a British artist could have received the same 100 GBP revenue even if her euro or dollar quantities or prices were falling. 
+
+For any meaningful economic analysis, the volume, price, and exchange rate effect must be separated.
+
+Revenues are multiples of use volumes over price expressed in a certain currency. They can be national or domestic market indicators if they contain revenues only domiciled rightsholder or neutralized rightsholders' revenues. Without the ability set up apart foreign versus national *or* domestic revenues, and break up the effect of changing volumes, prices and exchange rates, they are not suitable for economic analysis, and they do not indicate the earnings of the *average* or *typical* rightsholder.  They still maybe useful for business target settings, but only for organizations with a large and diversified portfolio.
+
+There are several problems with the existing national and international music industry reports:
+
+- They usually do not separate domestic, national and foreign income.
+
+- They do not consider the exchange rate, or use currency translations that may not be adequate for every type of analysis.
+
+- They do not separate the effect of price and volume change. 
+
+- Sometimes they do not even control the number of territories (jurisdictions from where royalties are received.)
+
+These problems give rise to the problem that growth in aggregates may lead to a diminishing revenue for smaller entities or individual artists. These indicators are not adequate for the use of small publishers, labels or managers of bands, artists, because they do not indicate growth or decline in volumes (and signal for changes in promotion), do not indicate growing or declining prices (and allow the focus of sales on more lucrative segments.) While currency risk can be hedged or otherwise insured, they do not even show which part of the earning change is attributed to exchange rate movements and which is related to the market performance of their catalogue.
+
+Ideally, the data collection should record volumes (number of streams), prices (value of individual stream), and exchange rates (conversion rate applied for the particular stream) for all significant markets of the artist, company or national organization. Currency translations must be consistent and meaningful.
+
+## Estimation strategies {#estimation-strategies}
+Almost all recorded industry transactions have full transactional detail (use, licensing data, price) and to a lesser extent, live music performances have rich transactional data. The problem with this data is that it usually transactional, and it is linked to various data that is connected to the protection of personal data (both rightsholder and often user data) and to business confidentiality.
+
+### Data integration approach {#data-integration}
+The problem with the transactional data of the live and recorded segments of the industry is that it is fragmented and protected by business confidentiality.  Our approach in the Digital Music Industry had been since 2014 to locate these data assets, provide a metadata map for the potential use of the data, and eventually, when there is an interest from the data owners to use the data, integrate the data for analysis. This way we are avare of the location, structure of much data related to the UK music business, but in the absence of a mandate to use the data, we cannot make copies of this data and use them in analysis.
+
+### Representative surveys
+The ESSNet-Culture methodology gives guidance on the application of the ICET model on creating music user surveys which can be analyzed jointly with transactional data.   The relevant ICET surveys are the Cultural Access and Participation surveys, which capture both the market-oriented (paid) and non-market (liturgical, amateur, home copying, pirated) uses of music. Representative surveying of the audience is possible, but it is getting increasingly expensive as people are more and more reluctant to give face to face interviews.  In our experience, a well-designed CAP survey is not well suited for CATI telephone interviews or online surveys.   However, plenty of data can be reused via “survey recycling” or new surveys can be compared with  “retrospective harmonization” with data from other countries or earlier surveys.
+
+### Balanced surveys
+The population of music enterprises and music professionals is unknown.  Microenterpries usually register under one NACE classification, but carry out many different task (a small enterpreneur may create recordings for both the music and the film industry, and work in the staging of theatrical prodcutions, and even be engaged in completely different economic activities.) This makes the traditional, business or personal demography based sampling impossible.  In my experience, a good quality of rebalancing or post-stratification weighting is possible when there is some information available from an authoritative source. The best source for this is collectively managed income, which is avialable with full transactional detail. For the making of the first Hungarian music industry report, and the Slovak  music industry report, we compared the self-reported copyright and neighboring right revenues of musicians with an anonymous, full payout distribution, and we made sure that sample populations self-reported income distribution correlates almost perfectly with the anonymous, full distribution. Generally, we omitted the 5-10 largest payouts, which are not representative for the distribuiton, but could be guessed on the basis of the popularity of the artist.
+
+### Survey design and harmonization
+Because surveying musicians and rightsholders is very difficult, we use various techniques to improve our results.  As mentioned earlier, we can use known payouts (such as various collectively managed income paid to living British rightsholders) to create post-stratification weights for responses. Another possibility that the Digital Music Observatory uses ex ante and ex post survey harmonization. Asking the same questions with the same methodology used in large, representative, national or Pan-European surveys allows us to understand the various demographic biases of musician surveys.
+
+For example, in the Central European Music Industry Report, we used relative income and life satisfaction questions that have been asked for decades by Eurobarometer, and compared results. In some countries, we could create a representaitve sample of musicians; we could observe that everywhere musicians’ earnigs were more precarious than that of the local population. A major advantage provided by survey harmonization is that we can compare musicians’ earnings with various occupational groups, too.
+
+Our suggested approach to the MCE project was the use of survey harmonization and post-stratification, but this was turned down by the Steering Group.  
+
+When we are surveying rightsholders, which I have done so far in 12 countries, we must keep in mind time and again that respondents are typically drawn from a very small minority of the rightsholders. Music careers are not always linear or exponentially growing, many rightsholders are inactive for years or decades when they often receive very little or no earnings, and do not participate in any surveys. Heirs almost always decline to participate in any music earnings survey. Statistically valid surveying is possible but challenging – in our surveys we use ex ante and ex post survey harmonization with national and international standardized surveys (which are available in the United Kingdom, too) and we compare surveyed, anonymously reported earnings with anonymised known earnings. For example, in the CEEMID surveys conducted in Hungary and Slovakia, we compared the anonymously reported income from Artisjus and SOZA with the anonymised, full payout of actual Artisjus and SOZA royalties to *living* rightsholders. Our successfully distributed surveys very accurately resembled the known, true payouts. Because the distribution of the earnings was very similar in 12 analysed countries, and in two we could very carefully compare the reported earning distribution with the true distribution, it is safe to assume that British payouts have a similar form.
+
+In any empirical analysis, it is important to note that usually we can observe a minority of the works or recordings, and a minority of the rightsholders. If we observe actual streams or payouts, most of the works/recordings are not used in any given period, and the second largest group is so scarcely used that the payout is carried over to a next period. In any given period, most of the works/royalty payments are not observed; additionally, the end of the long tail is also not visible.
+
+### Timeframe of analysis
+As we have experienced during the creation of the CI-CEEMID indices, most recordings' typical (median) earning over a single royalty payment cycle (a calendar month) is zero. But it is certainly not zero during the entire lifespan of the recording, and it is usually not zero for the first or second year. The choice of the timeframe for empirical observation is critical.
+
+Various licensed uses of music have three royatly payment cycles. Mechanical royalties are paid once in a lifetime. Public performance royalties are collected on an annual basis, and small earnings (that would be too costly to pay out during the year) are accumulated over two or more years. Streaming earnings are paid out monthly, but similarly to public performance royalties, small amounts are accumulated over two or more periods. Observing royalty statements alone cannot enable meaningful comparisons, because the same payouts on a given date--for example, 30 April 2020--refer to different earning periods.
+
+Periodical earnings often do not reflect accrued but unpaid royalties, which may affect a very large number of rightsholders, given that the earnings in the long tail are smaller than the accounting and bank transfer cost. These accrued earnings are not always lost, and often carried over to the next period when the payment, after payment costs, is practical. It is very easy to significantly underestimate the payouts *in the long tail*, because their *payment frequency is lower than among successful artists*.
+
+The different timeframes of various royalty collections has another impact on the analysis: different royalty cash flows are subject to different currency exchange rates. Two, seemingly equal royalty payments may veil a different quantity or price by an offsetting currency movement.
+
+### Sampling the unknown universe of works and recordings
+Many people are familiar with the work of _Sixto Rodriguez_, a Detroit-born songwriter, whose works were not licensed for more than 30 years after they were recorded between 1967 and 1971, until 1997, when it was famously discovered that he is a best-selling songwriter in South Africa. After the documentary _Searching for Sugarman_ won the Academy Prize, his recordings, 40 years after their release, became golden and platinum records in many countries.
+
+Many artists are active in their twenties, and in the 21st century they can expect to live 60-70 years longer, and their heirs enjoy copyright protection for further decades. Like Rodríguez's recordings, there may be many protected works and recordings that have not been observed in distribution schemes, media-, and streaming platforms, yet become successful in the future. In the absence of a global, compulsory registry of copyrights, we do not even know how many works and recordings enjoy copyright protection in 2021.
+
+Because there is no global database of copyright (and neighbouring right) protected music works and recordings, we do not know precisely how many rightsholders and how many works or recordings are protected by the law. From a strict mathematical perspective the average (mean) and typical (median) rightsholder earnings do not exist, because their calculation would involve division by, or ranking of an unknown number of rightsholders.
+
+Most rightsholders create works and recordings that have a limited lifespan: in a few years they lose their audience, and in the absence of their use, they no longer create income.  But, as the case of Sixto Rodríguez shows, they may in the future, even decades, or a hundred years later.  There are many rightsholders who create something, but never become full-time creators, or eventually they go back to part-time or occassional creators. Creating a representative survey of rightsholders is very challenging, becaues the rightsholder population has many inactive members.
+
+Similarly to rightsholders, most of the works and recordings are not in use, or hardly in use at any given time period.  Creating a representative sample of recordings or works for empirical observation is very difficult, because we simply do not know how many works or recordings exist.
+
+Since 2014, we perfected sampling both rightsholder populations and recordings to create better and better representations of the creators and their creations.  We created special surveys among music professionals to establish their typical earning levels and composition, and we created special samples of recordings to observe their typical revenues.
+
+The way we sample or weigh musicians’ self-reported earnings in the Digital Music Observatory’s surveys is based on the known, but anonymised payouts of author’s societies, and comparing it to the self-reported earnings from author’s societies.  The closer the self-reported median, quartile, or average payouts get to the know, but anonymous true payouts, the better the sample. In Hungary and Slovakia we were able to create highly representative music professional surveys for the active musician population. On active musician population we meant those living artists, who recieve some collectively managed royalties in a given year, i.e., their works are played on radio, television, directly identified public performance, collectively managed streaming services, on concerts, or other uses where author’s societies record use and collect revenues. We believe that this is the best target population for investigating music creator’s earnings. This target population is usually rather different from the payrolls of author’s societies, not to mention neighboring rights soceities, becasue those contain heirs of many deceised artists. This target population does *not* include new artist who do not have yet a registered work or commercially released sound recording, or whose works are not exploited in these channels. Generally, this is an appropriate target, though in some genres they may not be representative.  (For example, old and classical musicians play music that has no author royalties, and some subgenres of hip-hop are not radio friendly and avoid any registration.)
+
+The approach we used for the Central European Music Industry Report, which is so far the most comprehensive European music industry report, was a systematic sampling of a very large portfolio managed by Consolidated Independent (in the state51 music group.)  With the help of state51 music group’s engineers, we pooled the royalty statements of several million recordings, and chose to examine further those which were used in one of the four services (Spotify, Deezer, Apple, YouTube) in 20 select markets, including the United Kingdom. We did not believe that the Consolidated Independent portfolio was representative of the entire European or each of its national markets.  We used a sampling technique reminiscent of some bond and stock market indexes to select recordings that were good candidates to represent the earnigs of a typical recording in a given market and time period.  Our ‘index basket’ chose the median use of more than 300,000 recordings for 20 distinct national copyright jurisdictions and months.  The index basket was ‘rebalanced’ every month: songs that were used more or less than the median value were replaced with the median used (played) songs of the month.  We wil introduce these indice in the next chapter.
+
+Our indexing was deliberately experimental, and connected to the creation of the report, not the Music Creators’ Earning project.  We believe that more sophisticated and even largely different sampling techniques could be used for understanding earnings in streaming channels.  Our selection method tried to find the ‘typical’ song that was played in a given months, which is very different from the ‘typical’ recording.  In any given month, in the CI portfolio, as in any large portfolio, the ‘typical’ recording was not played, and the median (typical) earning was zero. We avoided this problem with selecting every month the ‘typical played’ song, but if we would like to characterize the ‘typical’ rightsholder, we would have to give up on the use of both the arithmetic mean (which is cannot be calculated as we do not know the number of protected works/recording) and the median (because it non-descriptively zero.) We still believe that the CI-CEEMID index is the probably the best descriptive statistic that can characterize British and European individual rightholder earnings.
+
+### Big data samples & synthetic datasets
+Various streaming services provide a more or less open API to their data, which is not suitable to harness a representative survey of uses, but nevertheless, provides a very large data access.  For example, the SpotiyR R statistical software packge provides a programatic access to the Spotify Web API and allows the request of relatively large amounts of data, potentially tens of thousands of data points per day. Music distributors, or rightsholder organizations also have access to vast amounts of data.
+
+Big data sources provide an unusually large amount of individually immaterial data. To translate this to far more limited but material, useful data, rather advanced statistical methods are needed.  The Law of Large Numbers proves that we can create useful, representative statistical indicators from such source. 
+
+For analysing markets, this is not a specific problem, or rather opportunity, for the music industry or music streaming.  The market of ar offers a university of investible financial products that is probably impossible to monitor entirely.  All over the world, government and corporate entities are issuing bonds, common stocks, mortage papers, and  various hybrid forms of equity or securtized loan products every day, often with very short maturities.  Short maturity securities often have a life span of only a month.  Financial service providers, like the Dow Jones Company, the Standard & Poors, have been creating statistically valid, representative samples (“baskets”) of securities to understand the representative price and volume metrics, and total market sizes (“capitalization”) for more than a hundred years.
+
+Recorded music is entirely a copyright-based industry.  It means that the value of phonogram is only related to the value of its copyright (publishing side) and neighboring right (recording side, which may be divided between producers and performers.)  The value of the recordings is derived from the cash flows, i.e. royalty payments to both sides (or in some jurisdictions, where performers are entitled to separate remuneration, all three sides.)  This makes the approach used by stock and bond indexes particularly useful for analysing the music industry.  Recordings are similar to stock-like securities in the sense that they do not have a fixed income --- in the music streaming services, the volume of their use and the price of their use fluctuates in every single copyright jursdiction every months.  They are similar to bonds in the sense that they have a fixed lifespan.  The term of the copyright and neighboring right protection eventually expires, though, in our experience, most recordings are similar to short-term fixed income assets because they only yield a material income in the first one or two years of their protected term.
+
+We used an analogy with the securities market in the Central European Music Report, where we compared volumes and prices of many European markets, among others, with the United Kingdom as a mature market. This analysis was extended within the Music Creators' Earnings project  [@antal_ceereport_2020; ].  The Digital Music Observatory is currently teaming up with statisticians to improve our sampling methodology. 
+
+Another approach, which is a bit reminiscent to our music profesionnal surveys', is the creation of synthetic datasets. This is the approach suggested by the Finnish policy brief, and partly, by our research collaboration on the modernization of copyright data and metadata [@osimo_symphony_2019; @ssrn3785272]. In this approach, the dataset owner is not revealing data that is protected by personal data protection or business confidentiality, but provides a randomized dataset that has exactly the same pre-defined statistical properties as the true dataset. In simple terms, the data owner is not releasing any real data, and any personal information, just a random(ized) dataset where the distribution of the analyzed information (such as the distribution of income, average and median income, standard deviation of the income) is very closely resembles the "true" data. Such techniques are often employed by statistical agencies, too, when they provide researchers with datasets from official statistical surveys.  
+
+## The CEEMID-CI Indexes
+The average and median (typical) earnings cannot be calculated arithmetically---the average does not exist if we do not know the number of works, and the median cannot be observerd if we do not know how many works, recordings, or rightholders to rank. The mean values are also rather useless because of the large concentration of revenues in a greatest hits segment.
+
+This problem is not specific for the music industry. Copyrights and neighbouring rights are claims for future cash flows, just like stocks and bonds. Many of the aspects mentioned above are present in the empirical analysis of stock and bond securities markets, where the global universe of investible securities is vast and changing daily, particularly in the bond market. Bonds often have only 30- or 90-days lifespan, they “expire” and new bonds are re-issued. Most copyrights and neighbouring rights only earn revenues in the first 1-2 years of their lifespan but remain in the copyright-protected universe potentially for 100-200 years.
+
+- The fact that copyrights and neighboring rights are fixed in term (even though often they are fixed relative to an unknown event, the death of the composer), they are similar to fixed income (bond markets). Eventually all rights will enter the public domain and stop paying royalties.
+
+- The fact that each music work and recording has a variable number of streams at a monthly varying price in varying territories makes streaming similar to dividend-paying stocks. Streaming payouts, like stock dividends or prices, are autocorrelated (March offers an insight into April earnings) but unpredictable in the long-run. Many songs enter a similar phase where they stop earning any royalties---much like the stocks of companies that cease to exist.
+
+The reports of IPFI and CISAC, in a financial market analogy, are describing the annual growth of market capitalization, but not the individual or even typical performance of assets.  Market capitalization can grow as the number of investible stocks, bonds, or streamable songs grows, even if representative sales volumes and prices fall. These are not useful for the characterization of the economic situation of investors or rightsholders. Instead, we pioneered the creation of indexes that represent the market view of a particular rightsholder.
+
+The CEEMID-CI indexes slightly resemble the approach of the Standard&Poor, Dow Jones, or iBoxx indexes. Indexing is complicated---the formula and know-how to create these well-known indexes is protected intellectual property, and we only used some of their methods to create our proprietary streaming indexes. Our indexes were not created for the MCE report, and we would have used a different indexing for this purpose, but we believe that our "typical" indexes are very useful for the aims of the MCE project.
+
+Our indexes paint a more rosy picture than that view from a 'typical' rightsholder. Our index shows what happens with the typical song of the month.  Every month, we selected those songs that were performing better than half of the songs in a particular country, and worse than the other half in the CI portfolio. This is the median value of the songs that were listened to by anybody in a particular country, and not a measure of all possible songs. The median (typical) value for all songs is zero, because there are so many more copyright and neighbouring right protected works and recordings available every given month than the amount which are played at least once. 
+
+In the period of 2015-2019, the typically exploited song in a large, independent portfolio exhibited the following characteristics:
+
+1.  The audience expressed in the volume (quantity) of the the monthly streams was generally increasing.
+2.  The monthly revenues were flat.
+3. 	The prices of a single stream were declining. 
+4.  The variability (risk) of the earnings from month to month was greater in emerging markets.
+5.  The greater risk in emerging markets was compensated with higher volume growth, and higher revenue growth, just like in financial markets.
+6.  The revenues of poor markets were high relative to the household cultural spending differences. Often we felt that the streaming providers made pricing mistakes, or inconsistent pricing in national markets. The likely cause is that neither the streaming providers nor the rightsholders made adequate market research into sales and price planning in the smaller markets, and naturally this increased the riskiness of international revenues.
+
+###  CEEMID-CI Streaming Value Index {#streaming-value}
+The revenues for the typical used song were roughly flat in almost all markets. This means a decline in streaming value in the case of flat volumes. Our finding is not contradicting the IFPI reports of rising total value. Streaming services are lincensed to more and more markets, and more and more recordings (from the newer territories, from the back catalogue, and new releases) are becoming available to a growing global audience. Because of the internationally competitive British repertoire, this means growth for the UK industry, at least in the *domestic* perspective, though in the *national* perspective the growing international competition may lead to loss of market share for invidiual rightsholders who are UK nationals.
+
+```{r median-value, fig.cap="Total Monthly Streams of a Typical Song in the United Kingdom and 19 European Markets", out.width='80%'}
+knitr::include_graphics(file.path(
+    "plots", "medianvalue-1.png"
+))
+```
+
+###  CEEMID-CI Streaming Volume Index {#streaming-volume}
+
+The streaming volumes in the earlier saturating, advanced markets of the United Kingdom and Germany showed slightly increasing or flat volumes for the typical used song. This is likely to mean a decline for the typical song, but the typical (median) song is not played in any given period, i.e. month. Emerging markets, where the service is later introduced, show initial growth.
+
+
+```{r median-quantity, fig.cap="Total Monthly Streams of a Typical Song in the United Kingdom and 19 European Markets"}
+knitr::include_graphics(file.path(
+    "plots", "medianquantity-1.png"
+))
+```
+
+### CEEMID-CI Streaming Price Index {#streaming-price}
+
+When volumes are rising and revenues are flat then prices must be falling. We have seen lowering prices per stream in almost all territories, expressed in GBP terms. Germany's flat price in GBP is the result of a falling euro price offset by the devaluation of the British pound against the euro.
+
+Streaming services logically target first the upper middle class users, and then offer cheaper subscriptions for families or students. The falling unit price follows the profit optimisation of streaming providers. 
+
+At first sight we may be surprised by relative high earning potential of poor markets like Albania. We attributed the relatively high remuneration in these countries to a low level of competition (few subscribers, fewer exploited songs) and the effect of various minimum licensing fees.
+
+```{r median-price, fig.cap="Total Monthly Streams of a Typical Song in the United Kingdom and 19 European Markets", out.width='80%'}
+knitr::include_graphics(file.path(
+    "plots", "mean_price_plot.png"
+))
+```
+
+In fact, we can see the very same effect within the United Kingdom, where the relatively new Apple Music behaves like an "emerging market" provider. In our report we hypothesized two explanations.
+
+- Rightsholders set a minimum licensing fee at the beginning of a new license. In the first months, when there are only a small number of subscribers who stream a small number of songs, the average revenue on each song is relatively high. 
+- There is a price discrimination present. Each service provider sells for the most interested consumer groups first, then offers various sales, and then rolls out family packages, where the subscription fee per household member is very low.
+
+```{r service-price, fig.cap="Quarterly Moving Average Price of a Typical Song in the United Kingdom", out.width='80%'}
+knitr::include_graphics(file.path(
+    "plots", "uk_service_price_plot.png"
+))
+```
+
+While it is tempting to single out Spotify as a lowest value provider, Spotify usually generates the highest volumes. The streaming service providers are rolling out subscriptions to different parts of society, and at different costs. For Spotify, the largest marketing cost is access to Apple's in-app purchase system. Spotify has challenged Apple on similar related cases in the UK, in the Netherlands and in EU jurisdictions [@apple_vs_spotify_reuters_2021]. 
+
+In this period, we did not see a very strong logic in how the subscription fees were set by the various streaming providers, though generally speaking, they set higher subscription fees in richer markets. Richer markets had higher subscriber bases, higher subscription fees, but also a higher level of repertoire competition---as larger parts of society could afford to buy electronic appliances and pay for subscription fees, they were interested in a broader repertoire of music. In small markets, where usually upper-middle class subscribers were present, the repertoire used was more homogeneous. In the 19 markets, we saw very different levels of interest for domestic and foreign music.
+
+The index values for the United Kingdom can be used as a benchmark for domestic revenues for the UK Music Industry, particulary for smaller rightsholders who are British nationals or British taxpayers. But because of the international competitiveness of the UK repertoire, even these artists are earning foreign revenues. For benchmarking the domestic (as opposed to national) revenues, an internationally diversified portfolio is a better point of reference. The UK music industry often represents foreign artists, too, who may have their main audience outside the UK. 
+
+One measure of competitiveness for a recording is its ability to draw revenues for many jurisdictions.  Music is a predominantly local business: most musicians have a smaller fan base than a country. Some bands may have followers only in Cardiff, or in Wales; some Welsh bands may be well-known in the entire United Kingdom but not abroad. And some of them are streamed globally. Any artists who can draw revenues from more lucrative markets than the United Kingdom may be better remunerated than the 'typical' British artist. And an artist who has many followers in relatively less lucrative markets, for example, in Eastern Europe, may receive less remuneration on the same number of streams. 
+
+### Publishing side
+
+We do not have direct information about the publishing side, and we believe that this is more difficult to observe. Some rightsholders, particularly large publishers, are licensing their songs directly to YouTube, Apple Music, Spotify and Deezer, and we do not have access to the terms of these agreements. Other rightsholders are collectively licensed. These licenses are not public.
+
+Generally, the revenues of the publishing side should move parallel to the recording side, but in our experience, because of the lower value of the publishing side, and the hybrid licensing model (direct or collective), far less care has been exerted to correctly document works. Our experience outside the UK shows that uncollected revenues may be significantly higher for the publishing side. 
+
+## Unpaid Revenues {#unpaid}
+In the streaming services, a very significant number of uses are not matched with rightsholders. There are many reasons for this:
+-	There are billions of transactions that have a very low value; the financial motivation to fix small administrative errors is minimal.
+-	Because of the very low expected income for many works and recordings, often the present value of the proper documentation of the work and recording exceeds the likely present value of future revenues. The documentation is patchy.
+-	There are no harmonized metadata standards, and righsholders cannot keep up with the documenting needs of billions of transactions.
+
+The problem of these uses is that they use up a large part of the total revenues (that are financing both royalty payments and operating costs, including identification costs). The cycle of these unpaid royalties is seemingly long, but due to the complexity of the problem, very often the problem is never solved on time. These revenues, after cost deductions, will eventually land in some form of a ‘fund’ that will re-distribute these revenues to other rightsholders. This effect is a redistribution from less documented and typically small catalogues to large catalogues.
+
+In emerging markets, the problems are so persistent, that often they are not solved over several resolution cycles. We have all reason to believe that the problem is more severe on the publishing side, at least partly because the value of the publishing side is smaller in streaming, and the licensing model is more complex---there are more things that can go wrong, and the revenue pot to solve the problem is smaller [@ssrn3785272].
+
+We do not want to suggest that all factors always move against niche genres and independent labels. This example tries to explain why a very fragmented industry like the UK music industry can face so different revenues and economic landscapes. An empirical examination of this problem is even more difficult than observing the average or typical rightsholder revenues, because the magnitude of the problem is unlikely to be independent of firm size, language, and other characteristics of the repertoire documentation.
+
+
+<!--chapter:end:02-empirical.Rmd-->
+
+# Price Harmonization and Valuation {#price-valuation}
+
+The music industry is a very fragmented and concentrated economic sector, where most creators and enterprises are price takers without any pricing power.  Pricing is usually negotiated by representative national organizations (for mechanical and public performance licensing) or via labels and publishers of large rights portfolios in the hybrid licensing scheme of streaming,  and the special cases of ‘grand rights’, such as theatrical use, film ‘synchronization’ and advertisement.
+
+Both the publishing and recording side of the industry is exploiting intellectual property, i.e. copyrights and neighboring rights, and gives licenses for the use of the music. The publishing side also licenses live performances, even in cases when the composer is present on the stage of the live performance.
+
+Some forms of licensing, such as exploitation on theatrical stages, the price setting is completely unregulated---an artists or her publisher can freely negotiate with a theatre on the use of the music in a dramatic setting. This is, however, a small minority of the music uses. In most cases, there is some form of compulsory licensing in place. Until the emergence of music streaming, the buyer side of the music industry was so much more concentrated than the seller side, that for practical reasons, music was sold in bundles.  If an artist released a record, and gave a mandate to license this record to radio or television stations, it was not possible to revoke this license (it became part of a so-called ‘blanket license’).  In the absence of seller choice (the artist had no say on the actual sales volume, or price), various forms of regulated pricing schemes had been introdcued in the 20th century. 
+
+Both the publishing and recording side of the industry is exploiting intellectual property, i.e. copyrights and neighboring rights, and gives licenses for the use of the music. The publishing side also licenses live performances, even in cases when the composer is present on the stage of the live performance.  The licensing policies are set by various forms of regulations on the exploitation of intellectual property.  Copyrights and neighboring rights are governed by international law, and in Europe, they are further harmonized by EU law.  Because the United Kingdom has harmonized its laws with the EU for four decades, at this moment, UK law is very similar to EU law.  The valuation principles of intellectual property are set by various standards set by the World Intellectual Property Organiztaion and the International Financal Reporting Standards Board.  The IFRS standards are incorporated into both UK and EU accounting law, and the WIPO standards have a similar international law underpinning as the more specific copyright and neighboring right. The valuation and price setting of music must comply with the broadest fair value principles (set by international financial reporting standards) in the light of the intellectual property standards set by WIPO.  At last, copyright and neighboring rights law have special provisions, often called as "equitable remuneration".  From an economic perspective, we treat equitable remuneration as a special case of fair valuation. Even when equitable remuneration is not literally applicable in the music industry, we believe that the broader fair valuation principle should yield a similar result. 
+
+The music industry is a very global industry, and these international standards harmonize many aspects of music licensing.  The high level of global standardization had been one of the pre-requisites of the emergence of global music service providers like Spotify or Apple Music.
+
+In a competition-based market study, the aim may not be the investigation of price setting, however, understanding the empirical difficulties in setting the prices is important to understand the difficulties and opportunities for any form of market analysis.
+
+## Fair Value {#fair-value}
+The concepts of copyright law, such as equitable remuneration, set a legal basis for the remuneration of creators, particularly in cases where the seller has no freedom of contracting the actual user.  Such rules, however, do not contain regulations on how to set the paiable sum---this often leads to a confusion. In the United Kindgom in 2020-21 there had been a lively debate about various forms of equitable remuneration. Yet it is not the equitable remuneration right that tells what should be the price applied when an artist is paid out.
+
+This is not an unusual situation in modern market economies.  Owners of natural monopolies, or large corporate structures are not always allowed to freely negotiate prices. In the, European Union, copyrights are treated as constitutionally protected rights which are protected on an equal level with fair competition. Pricing in these cases usually follows some legal norm and economic principle.
+
+When rightsholders are not in the position to negotiate rates freely, various legal, accounting, and economic norms, and institutional guarantees must be in place so that they receive fair and equitable remuneration. Because copyrights and neighbouring rights (in European parlance, or recording copyrights in U.S. terminology) are valuable intellectual property rights, they entail fair compensation for the use of rightsholders' works or recorded fixations.
+
+When intellectual property is sold (against a lump-sum payment), or licensed (for periodical payment), or used as a pledge against a loan, the transaction must comply with the *Fair Value* standard.  This standard is, similarly to copyright law, set by international law, which generally can only in detail be modified by UK law. The Fair Value standard of the *International Financial Reporting Board* has been incorporated into UK law via EU law, and remained UK law after Brexit. 
+Our understanding is that music prices should mainly follow the Fair Value standards, but they are also inspired by the more generan *Arm's length* principles: whenever a market transaction is not possible, the compulsory conditions should resemble of something that two market powers without power or proximitiy of interests (*at arm's length*) would agree to pay.
+
+In 2008, the global recording industry body, IFPI, published _Valuing the use of recorded music_,  created by PriceWaterhouseCooper [@pwc_valuing_2008]. This excellent methodological guide applies the WIPO and IFRS standards [@ifrs_fair_value_2011; @flignor_orozco_ip_valuation_2006; @puca_intangible_2019] on valuing copyrights in more practical terms for the music industry.  The valuation principles are enshrined in the fair valuation principles of the WIPO, and the fair value principles of the International Financial Standards Board---their use is not a recommendation but statutory obligation in most IFRS countries.  This makes applications of valuation examples (particularly in competition practice) from other countries, Slovakia and Hungary in this case, largely applicable in the United Kingdom.
+
+The recognized fair valuation principles stipulated that the “most applicable method” must be used in valuations, which almost always leaves out in copyright contests the (historical) “cost approach”, and leaves open the use of the “income approach” and the “market approach”.
+
+The *income approach* compares the royalty flows of a work of its recording via the using an appropriate “discount rate.” When a user buys in a music store an mp3 file on 1 July 2015, it triggers a single royalty payment after the deductions of the cost of sale on the marketplace. In a streaming platform, the same user’s royalty payments appear every month when she listens to the song, and in radio, usually every year. The discount rate provides a proper comparison between remuneration received in July 2015 and April 2021.
+
+The *market approach* tries to identify a payment rate, regardless of if it is made in lump sum, monthly or annually to established, sufficiently similar uses. Many ideas were tried internationally to identify the sufficiently similar use of music streaming; for example, relating ad-supported and automatically selected songs to radio streams, and relating cases where the user controls the selection of songs, and may even download them to music downloads. In this research report I do not try to review these cases, as many of them may be subject to litigation in various jurisdictions that apply both equitable remuneration and fair valuation principles, and similar principles of competition law.
+
+The application of *fair valuation principles* is particularly challenging in the case of private copying, where the transactions are not recorded (as they are not market transactions) and in streaming, which is a relatively new technology that is seen in licensing as a mixture of earlier mechanical copy-based and public performance-based licensing, and has so many transactions that most rightsholders (and even their national organizations) like the data processing capacity to administer the rights or challenge incorrect payments.
+
+Comparing  royalties is challenging because some royalties are paid upfront and for perpetuity (like in the case of the digital download model of mp3 music, mp4 audiovisual or epub book files); music streams are remunerated monthly, based on actual use; and public performance streams, such as broadcasting, are usually remunerated annually, in equitable proportion to the use of the works and recordings.  Furthermore, radio stations, for example, pay for both mechanical copying of music and making it available to the public. So direct comparison, as we will see in the subsequent chapters, requires a common unit of measure---we translate all rates to annual rates. 
+
+The CEEMID full-market model (introdcued in [Music Use and Rightsholder Damages](#music-use) and [Enjoyment of Audiovisual Content and Rightsholder Damages](#av-use)) was partly based on _Valuing the use of recorded music_, an excellent methodological guide created by PriceWaterhouseCoopers for IFPI [@pwc_valuing_2008]. In our understanding, similar valuations presented here in this short example must meet high statistical standards [@frank_guy_essnet-culture_2012] and IFRS Fair Value standards [@ifrs_fair_value_2011; @commission_regulation_2012_1255] which had been adopted into EU law. 
+
+```{r royalties, eval=FALSE, echo=FALSE, fig.cap="Breaking Up Music Enjoyment Hours" }
+knitr::include_graphics(file.path('plots', 'listen_hours_by_license_16x9.jpg'))
+```
+
+This was the framework that CEEMID, a cooperation of several European rightsholders including SOZA started to develop, when they started to cooperate on meeting the data requirements of these valuation techniques. It was used for royalty pricing and compensation claims in Hungary [@antal_szabad_2017_en; @antal_szabad_2018_en], Slovakia [@antal_slovenskom_hudobnom_2019_en] and Croatia [@antal_pcr_croatia_2019] are comparing per hour royalty revenues in various licensing and compensation models, therefore providing a common metric for mechanical, public performance, streaming and private copying compensation revenues. 
+
+This model is based on a competition policy-based argument.  Radio stations, television, YouTube and streaming platforms are all competing for the attention of consumers, and they are competing with each other. In any minute when a user is listening to music or a podcast in a car, she is not listening to radio; when he is watching YouTube, he is not watching television.  And of course, when a vinyl record is played on a turntable at home, the digital radio is not playing.
+
+## Equitable remuneration {#equitable-remuneration}
+
+In the UK policy debate, a potential redefinition of equitable remuneration rights received noteworthy attention, and it is a good starting point to understand music earnings. Equitable remuneration is originally connected to a compulsory license that must be paid when recorded music is played on a publicly accessible location to the performing artists and music producers.
+
+The current UK debate is perhaps too much focused on the UK definition of equitable remuneration rights. The changes promoted by the Broken Record campaign were successfully made in several European jurisdictions, but they did not significantly change the earnings of most creators. By focusing on the re-definition of the equitable remuneration right, the debate is only focused on the re-distribution of a very small portion of the music ecoystems’s income. This blurs the fact that the general level of earnings---which is not governed by the equitable remuneration right, but by fair value, arm’s length standard, and competition law---is declining and seems to be inadequate compared to historical levels.
+
+*Equitable remuneration* is a legal concept which has an economic aspect. In international law, it was first enshrined as Convention C100 of the ILO, stipulating that men and women should receive equal pay for equal work [@ilo_c100]. Within the context of international copyright law, it was introduced as a modification of the Berne Convention by the Rome Convention for the remuneration of the broadcasting of recorded fixation of music works (recordings) since 1971. This right is further elaborated by the WIPO Performances and Phonograms Treaty (WPPT).These copyright conventions are administered by the WIPO [@wipo_copyright_treaty; @wipo_wppt].
+
+The equitable remuneration is originally connected to a compulsory license that must be paid when recorded music is played on a publicly accessible location to the performing artists and music producers.The compulsory licensing means that the rightsholders are not in a position to negotiate the royalty rates, or deny use to any business entity. (Compulsory licensing never applies to private end-users.) The paiable rate is called *equitable* (and in some jurisdictions, *fair*), because it is not a negotiated, market rate. The law stipulates in these cases, however, that the rate must be set *as if* they have negotiated in a market transaction of two willing parties without monopoly (supplier power) or monopsony (buyer power) In economic terms, these rates must be set on a *fair value* basis.
+
+The [scoping paper] correctly excludes the analysis of equitable remuneration from the scope of the UK market study. The equitable remuneration standards in international treaties do not set a standard on how to calculate equitable remuneration. In an international context, a study of Europe Economics and IVIR has shown that there are notable differences in how *equitable remuneration* is understood---and it is often used as a synonym to *fair* remuneration [@ivir_remuneration_2015]. In our understanding, the equitable remuneration should happen at \@ref(fair-value)[fair value](#fair-value) as defined by economics and international accounting standards.
+
+It is sufficient to note that equitable remuneration is not a pricing issue, but it is an important legal mechanism to make sure that copyright and neighboring rightsholders are remunerated. In spite of the national differences, it is a sufficiently harmonized system that allows the functioning of the global music industry without major barriers, and therefore allows the comparison of revenues, prices and volumes, too. 
+
+## Unlicensed streams and the value transfer to internet platforms {#unlicensed}
+
+Value transfer is undermining mechanical licensing, public performance, mixed streaming licenses, and even compensation values for home copying. They offer a cheaper platform for viewers than licensed onces, which moves the basis of potentially royalty earning revenues towards the media platform. We have measured this effect in several European countries, and we have found this to be far more significant than the potential redistribution effect from pro-rata streaming distribution (see the next \@ref(distribution-rules) subchapter) or the redefinition of the equitable remuneration right (subchapter \@ref(equitable-remuneration)). 
+
+1. Unlicensed uses create competition to the business-to-business users of music, audiovisual content, books and other copyright protected content. For example, television stations and radio stations lost audiences to YouTube, because YouTube could offer programming "for free",  as it paid only about 1-10% of the similar royalties of broadcasters for content. This means that advertising revenue moved from TV and radio stations to YouTube. This revenue should have been shared with rightsholders by the broadcasters.
+
+2. The availability of unlicensed platforms, such as YouTube, that claims not to be a streaming platform, and pirate websites reduced demand for licensed, legalized use of copyright protected content. The lower sales volumes and the direct loss of advertisement revenues reduced the market price of content.
+
+3. Because private copying remuneration must be based on market values of music, filmed content, literary works, and other works, it is important that we enumerate the price loss due to illegal activities, so that the damage claim is truly based on arm's length rather than  illegal market transactions.
+
+We were not provided with data to estimate the size of the value transfer in the United Kingdom, but given the global nature of the music ecosystem, we do not believe that the British rightsholders are affected differently than European ones. Partly, because a large part of the British revenues are export revenues to the European Union, and partly because unlicensed media platform are competing precisely in the same manner in the UK with licensed public performers or streaming platforms like in other countries. We believe that the existence of the value transfer is one of the sources of the declining value of music shown in subchapter \@ref(streaming-price), but we have not attempted to estimate the size of this effect. However, our detailed data in Hungary, Croatia, and Slovakia suggest that the value transfer amounts to 10-20% of the total music market value.
+
+
+
+
+
+During the creation of this report a legislative process is under way to implement a new European legislation that aims to close the value transfer to unlicensed media platforms. Media platforms, like YouTube, unlike licensed music streaming services like Spotify, Deezer, Apple Music or licensed audiovisual services like Netflix, did not get a license from rightsholders for the use of their music, audiovisual content, literary or artworks. Their objection to such licenses were based on the safe harbor of copyright law mandated by the U.S. Congress to help the evolution of internet businesses. 
+
+The representative associations of composers [@gesac_regulatory_2015; @gesac_copyright_2015; @cisac_cisac_2017], performers [@aepo-artis_give_2016; @aepo-artis_comments_2017], and producers [@moore_value_2016]  in Europe were all strongly calling for a change in these practices, while technology companies on the other side were vehemently lobbying European governments and members of the European Parliament to stop or water down proposals. Eventually the European Union adopted the new Copyright Directive  [@eu_directive_2019_790].  In the next two years all member states need to transpose it to national law.  It is very important that to give similar weight to modernizing the private copying remuneration and the value transfer to bring Slovak artists' and producer's revenues closer to the normal, European equitable remuneration.
+
+In the context of the home copying, value transfer does not only undermine licensing to television and radios, but it also undermines the home copying compensation  scheme, too.
+
+1. Unlicensed uses create an unlawful compensation to the business-to-business users of music, audiovisual content, books and other copyright protected content.  For exampe, televison stations and radio stations lost audiences to YouTube, because YouTube could offer programming "for free',  as it paid only about 1-10% of the similar royalties of broadcasters for content. This means that advertising revenue moved from TV and radio stations to YouTube.  This revenue should have been shared with rightsholder by the broadcasters.
+
+2. The availability of unlicensed platforms, such as YouTube, that claims not to be a streaming platform, and pirate websites reduced demand for licensed, legalized use of copyright protected content.  The lower sales volumes, and the direct loss of advertisement revenues reduced the market price of content.
+
+3. Because the private copying remuneration must be based on market values of music, filmed content, literary works, and other works, it is importnat that we enumerate the price loss due to illegal activities, so that the damage claim is truely based on arm's length market transactions, and not illegal transactions.
+
+
+### Private Copying and Illegal Activities {#illegal}
+In this report, we do not distinguish among various unlicensed uses of music. There are unlicensed uses that do not fall under the private copying exception, and therefore it should be persecuted by the Slovak state, and the rightsholders could claim damages from users on a different legal basis.
+
+However, this distinction is rarely made in copyright administration and enforcement, because understanding the legal and technical nuances of the excempted and illegal use requires both copyright law and technical knowledge. Slovak authorities hardly use these distinctions: non-exempt private users are hardly ever persectued, and damages are hardly ever paid for rightsholders on a different legal basis. The distinction would be even more difficult to make for ordinary citizens, who are randomly invited to the survey interviews. Some illegal uses of music are also criminal activities, and it would be  unethical and produce unreliable results if we would ask people about criminal activities that would incriminate themselves.
+
+Therefore, whenever they claimed that they copied unpaid music, films, series episodes, television programs, audiobooks on their devices, we used the term “unlicensed use” and we assumed that these cases should be compensated under the private copying regime. Of course, the rightsholders and the competent authorities of Slovakia may decide to choose a more nuanced approach, and litigate cases that may not fall under the private copying excemption on a different legal basis.
+
+
+
+<!--chapter:end:03-price.Rmd-->
+
+# Price Disintegration: Timeframe and Functional Currency Problems {#simulation-results}
+
+## Timeframe of analysis (#case-study-timeframe)
+Most works and recordings are used in any earnings period. In the case of certain rights, such a public performance rights in television or radio, retransmission rights, royalties are accumulated throughout a year, and paid out once. In music streaming services, some pay-outs are accumulated during a calendar month, others throughout a year or multiple years (particularly collectively managed composer rights in some jurisdictions.) Because some earned royalties are very small, royalty management organizations do not pay out but accumulate earnings where money transfer and accounting costs would be larger or would take most of the payout.
+
+In our case study we chose to compare the comparison of annual revenues, bearing in mind that this may lead to smaller or greater inconsistencies, particularly in cases when royalties are paid once in lump sum. A more precise valuation would require many years of historical data that is not available in the Slovak Republic.
+
+As we have experienced during the creation of the CI-CEEMID indices, most recordings' typical (median) earning over a single royalty payment cycle (a calendar month) is zero. But it is certainly not zero during the entire lifespan of the recording, and it is usually not zero for the first or second year. The choice of the timeframe for empirical observation is critical.
+
+Various licensed uses of music have three royatly payment cycles. Mechanical royalties are paid once in a lifetime. Public performance royalties are collected on an annual basis, and small earnings (that would be too costly to pay out during the year) are accumulated over two or more years. Streaming earnings are paid out monthly, but similarly to public performance royalties, small amounts are accumulated over two or more periods. Observing royalty statements alone cannot enable meaningful comparisons, because the same payouts on a given date--for example, 30 April 2020--refer to different earning periods.
+
+Periodical earnings often do not reflect accrued but unpaid royalties, which may affect a very large number of rightsholders, given that the earnings in the long tail are smaller than the accounting and bank transfer cost. These accrued earnings are not always lost, and often carried over to the next period when the payment, after payment costs, is practical. It is very easy to significantly underestimate the payouts *in the long tail*, because their *payment frequency is lower than among successful artists*.
+
+The different timeframes of various royalty collections has another impact on the analysis: different royalty cash flows are subject to different currency exchange rates. Two, seemingly equal royalty payments may veil a different quantity or price by an offsetting currency movement.
+
+Our simulations use the CI-CEEMID index as starting points and create hypothetical songs that behave similarly to the ‘median’ and ‘successful’ songs. We will expose these hypothetical songs to various genre-, exchange-rate, and other economic scenarios. We will create about 10,000 simulated songs to show why their earnings are so vastly different. Our simulated songs are not actual songs, but they very much resemble a realistic song. The changes in the streaming market environment are either historically recorded changes, or realistically changed simulations (for example, recasting historic exchange rate scenarios.)
+
+1.	In subchapter \@ref(difference-popularity) we simulate earnings for recordings with different popularities. We create random, but markedly different song audience build-up profiles (quick hits, perennial hits, etc.)
+
+3.	In subchapter \@ref(release-time) we simulate the effect of different release dates, for example March 2019 and January 2017.
+
+4.	Random, but realistic market shares among six countries (the addition of more countries would not give more insights) are presented in subchapter \@ref(difference-international).
+
+5.	The effect of different exchange rates is simulated in subchapter \@ref(exchange-rate-effects) for five countries---both using historical exchange rates, and realistic, hypothetical, alternative scenarios.
+
+We show that two identically popular songs released in the same month and with the same number of fans in each country but with different price levels and subject to different exposure to external economic factors can have 30% more or less revenue on the same number of streams. If we consider market share differences between the UK home market and abroad, the differences will be even bigger.
+
+## Different Popularity {#difference-popularity}
+
+We generated realistic streaming volume profiles for smaller and larger bands.  We follow them for 60 periods (5 years), but most of them, like real songs, make 95-99% of their revenues in the first 1-3 years.  
+
+```{r pouplarity-sim, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Simulated Songs With Various Levels of Popularity",  fig.align='center'}
+load( file.path("plots", "revenue_scenarios.rda") )
+load ( file.path("plots", "simulation_example_plots.rda") )
+load ( file.path("plots", "exchange_rate_plots.rda") )
+plot (stream_example_release_1_plot)
+```
+
+This means that the average `monthly 100 streams` on a song (6000 over 60 periods) can be much higher, around 1000 in the first month, and very low, as calculated by the CEEMID-CI medium volume index, afterwards. Our scenarios are a bit too optimistic: while we know that most songs tend to have 0 streams per months in the long-tail, we gave them the CEEMID-CI medium volume value (1-9 streams), which is a slight overestimation. In the way in which the CEEMID-CI index is constructed, these values are calculated only from songs that were streamed at all – and many songs that were used to construe the index value in period 2 may have fallen out from the index (in the absence of streams) in period 3. Any song that reached consistently the level of the CEEMID-CI Medium Volume index is far more successful than the half of the entire observed universe. Yet, we are talking about a penny over a year, so this “optimistic” view does not really alter our conclusions. Rather, it further highlights the fact that most songs do not earn anyway a single penny in a typical month.
+
+So, our popularity level `monthly 100 streams` distributes 6000 streams over 60 periods. Another popularity level of `monthly 10000 streams` distributes 600000 streams over 60 periods in various scenarios usually following the density function. In fact, for discrete time periods, the histogram of left-skewed lognormal pseudo-random numbers repeated 6000-6000000 times. 
+
+- Quick hits reach their peak audience (1000, 10000,100000 streams per year) in a territory in 1-3 months.
+
+- Slowly building hits reach their peak audience in a territory in 3-12 months.
+
+- Perennial hits have a stable audience. 
+
+Our songs have random streams in each territory following various lognormal distribution density functions, rounded to 0 decimal points. (There are no 1.5 streams, only 1 or 2 streams.) 
+
+revenue~1~ = x~1~ \* p~1~ 
+
+revenue~2~ = x~2~ \* p~2~
+
+If we place the annual revenue of the first 1..12 periods into the matrix *X*, then the annual revenue will be 
+
+revenue  = X \* p
+
+
+
+```{r revenue-table-1, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Various Revenue Equity Measures for Random Songs Released on the First Period",  fig.align='center' }
+revenue_table_1 <-  sum_table_revenues_domestic_1 %>%
+  kbl( align = "c", digits = 3, 
+       col.names = c("popularity", "release period", "mean", 
+                     "median", "max", "min", "range", 
+                     "rel. range", "stdev") ) %>%
+  kable_classic(full_width = F) %>%
+  add_header_above(c(" " = 2, "Earning Level" = 2, "Earning Differences" = 5)) %>%
+    column_spec(1, bold = T, border_right = F) %>%
+    column_spec(2,  border_right = T) %>%
+    column_spec(4,  border_right = T) 
+
+if ( knitr::pandoc_to("docx") ) {
+   revenue_table_1 %>% as_image()
+    
+} else if ( knitr::is_latex_output() ) {
+    revenue_table_1
+} else {
+      revenue_table_1 %>%
+        footnote(general = "Based on the CEEMID-CI median value streaming indexes and simulation.\n\ua9 Daniel Antal, music.dataobservatory.eu 2021.") 
+    }
+    
+```
+
+In our hypothetical scenario, within the different popularity ranges there were 10.2-14.6% _justified differences_ in the first-year earnings in the United Kingdom. These values are lower than the observed 28% variability in streaming values–--the maximum possible difference would have been observed between two unrealistic hypothetical song: one that only had an audience in the best paid, and the other in the worst paid month. Just within the UK, not counting export revenues from foreign countries, a difference in the value of 1000 streams on the level of 10-14% is perfectly normal due to the fluctuation of monthly streaming prices.
+
+## Effect of Release Time {#release-time}
+
+We simulated the effect of different release times with filling up the revenues of our hypothetical songs with 1-25 zero values; they started their 60 simulated periods in period 1, 2, … 25.  We used this perfectly realistic simulation to show that new releases in the period 2016-2019 were released in different (and deteriorating) environments.  Songs released in 2019 were competing for a far bigger and diverse audience, and with far more songs than songs released in 2016.  One of the biggest _justified difference_ among righsholders is the release time of their work or recording.
+
+```{r release-sim, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Simulated Songs with Various Popularities and Release Dates"}
+plot(stream_example_release_all_plot)
+```
+
+As more and more users are joining the streaming markets, and the services are available on newer and newer territories, competition is increasing on the platforms. For example, with licensing to India, potentially hundreds of millions of users emerged who have a distinctly different taste from Northern American or European audiences’ tastes. This motivates rightsholders of Indian music to start distributing their new and back catalogue even more in the platforms. The increasing competition leads to a lower likelihood of a song being selected by playlists or users, and because both user tastes and available catalogue is getting more heterogeneous. Furthermore, as all the rich markets are already licensed, new users are entering the system at far lower subscription fees and per stream revenues.
+
+```{r streaming-price-difference,  fig.cap="Streaming Price Differences in the UK and Select Countries Over Time in the CEEMID-CI Index, Graphic Presentation"}
+plot (price_distribution_plot)
+```
+
+We see a short, transitory period in new markets when only a small number of early users subscribe, typically from the local upper middle class, and music that fits into those local tastes achieves sometimes higher revenues per stream than in the UK. These may be caused by the way licensing agreements are constructed, and initial or minimal payouts are defined. But these opportunities are very short-lived and available for a very limited number of rightsholders. 
+
+The \@ref(fig:streaming-price-difference) shows that the price difference over time is relatively small in Germany and the United Kingdom, but quiet widespread in the emerging market of Lithuania. In this dynamic environment, when a song is released is not a matter of indifference. We will simulate this with placing our hypothetical, randomly generated, but realistic stream counts in different times into the model. A hypothetical song released in December 2017 has a very different market environment in the first critical months than another one in March 2019. 
+
+Our model is extended with the release date, which will be one of the 1 ... 25 periods of the indexed period. For a song that is released in the first known period the first annual revenue is
+
+revenue~1~ = x~1~ \* p~1~ 
+
+...
+
+revenue~12~ = x~12~ \* p~12~
+
+and for a song released in the 15th period, the first annual revenue will be the sum of
+
+revenue~15~ = x~15~ \* p~15~ 
+
+...
+
+revenue~26~ = x~26~ \* p~26~
+
+Taking only British streaming prices into consideration, the later the release date, the less is the revenue on a similarly popular song.
+
+```{r release-date-effect, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Effect of Release Date on Revenues"}
+plot(revenue_release_day_uk_plot )
+```
+
+In the UK, the observed typical prices had a 29% range: this is the 'worst case scenario' difference in the observed period between revenues on the same number of streams. In reality, extreme low and high prices do not last long, and any rightsholder whose song was in use for several months could expect a smaller variability. But regardless of popularity, we can clearly see on the Chart \@ref(fig:release-date-effect) that songs released later could expect a lower return on the same number of streams across popularity categories.
+
+```{r price-differences, results='asis', fig.cap="Streaming Price Differences in the UK and Select Countries, Tabular Presentation"}
+
+price_diff_table <- country_price_summary %>%
+  kbl( align = "c", digits = 3, 
+       col.names = c("country", "mean", "sdev", "range", "absolute deviation %") ) %>%
+  kable_classic(full_width = F) %>%
+  add_header_above(c(" " = 1, "Revenue" = 1, "Risk" = 3)) %>%
+    column_spec(1, bold = T, border_right = T) %>%
+    row_spec(1, bold = T, color = "white", background = "#DB001C") 
+if ( knitr::pandoc_to("docx") ) {
+   price_diff_table %>% as_image() 
+} else if ( knitr::is_latex_output()) {
+    price_diff_table
+} else {
+    price_diff_table %>%
+        footnote(general = "Based on the CEEMID-CI median value and median volume streaming indexes.\n\ua9 Daniel Antal, music.dataobservatory.eu 2021.")
+}  
+```
+
+The UK in this example is a high-return, low-risk country.  We have seen temporarily higher prices in some emerging markets---we believe these are temporary anomalies, related to minimum licensing fees, and lack of competition. (During the observation period, often only Deezer was present in the emerging markets, and was distributed in special packages together with telecom companies.) Among the mature markets, only the German market was less risky than the British one.
+
+## International Competitiveness {#difference-international}
+
+Our simulation contains realistic scenarios about earnings in a few advanced and emerging markets besides the UK. While we only simulate results only in a few select countries, we do not believe that a global model would add a lot more insight into our report. The differences in earning potentials among rich markets is not that great, and rightsholders who have a large audience in the United States or other markets can expect similar results. We want to keep our example traceable, and we want to work with a limited number of exchange rates. 
+If we compare the following table with the price differences in \@ref(release-time), we will realize that the exchange rate changes in the last 8 years were as great, or even greater as the streaming price change *within the UK*.  If a British rightsholder had significant audience in Eastern European emerging markets, the price changes could have been greater than within the UK *only because of the exchange rate risk*. The exchange rate risk against rich, advanced markets in the Eurozone and Switzerland was around the same magnitude as the price variability in the UK.
+
+```{r fx-differences, results='asis', fig.cap="Streaming Price Differences in the UK and Select Countries, Tabular Presentation"}
+current_rate_table <- currency_rate_summary %>%
+  kbl( align = "c", digits = 3, 
+       col.names = c("country", "mean", "sdev", 
+                     "range", "absolute deviation %") ) %>%
+  kable_classic(full_width = F) %>%
+  add_header_above(c(" " = 1, "Revenue" = 1, "Risk" = 3)) %>%
+    column_spec(1, bold = T, border_right = T) %>%
+    row_spec(6, bold = T, color = "black", background = "#e5e5e5") 
+
+if ( knitr::pandoc_to("docx") ) {
+   current_rate_table %>% 
+        as_image() 
+    }  else if ( knitr::is_latex_output()) {
+    current_rate_table
+} else {
+    price_diff_table %>%
+        footnote(general = "Based on the CEEMID-CI median value and median volume streaming indexes.\n\ua9 Daniel Antal, music.dataobservatory.eu 2021.")
+}  
+
+```
+
+The exchange rate risk and the foreign streaming price risk, depending on the risk metric used is multiplicative or additive. The absolute price changes in the European markets were about 30-80% in the streaming period, and the exchange rate movements add about another 30%. In the indexed, post-Brexit period the pound was devaluing, while the streaming prices were decreasing. This means that the systematic devaluation of the British pound shielded from about 1/3 of the negative export price changes in Europe. (Systematically, similar effects were felt in the American and Japanese markets, but with different variability.) 
+
+Our hypothetical artists have a random market share in the UK, Germany, the Netherlands, Switzerland, Czechia, Hungary (We chose CH, CZ and HU because of their different currencies, the CHF, CZK and HUF.)  These are relevant scenarios for the British music industry, which is a global leader. British labels and publishers often sign Dutch artists, for example, who have a larger market in the Netherlands than in the UK. Or, in some of our scenarios, a mainly British rightsholder has a significant fan base in Poland and Hungary. These are all plausible scenarios, but of course, for smaller British labels and artists who do not have a large following abroad, those cases are more interesting where the large majority of the income, say, at least 80% is arriving from the UK.
+
+For the British music industry, the use of the English language is an international competitive advantage in most genres. (Of course, this is not the case with authentic Sami folk or classical music, or instrumental genres.)  While a Hungarian-language song will hardly find place on a playlist outside of Hungarian-speakers, who are a very small minority in the United Kingdom, English-language music is dominant on the Hungarian market.
+
+```{r release-international, echo=FALSE, fig.cap="Effect of International Diversification on Revenues, Side-by-Side Comparison", messages=FALSE, warning=FALSE, fig.align='center'}
+knitr::include_graphics(file.path("plots", "Effect_International_Diversification_Revenues_Coplot.png"))
+```
+
+
+The point we are making here is that artists who are competitive in the rich markets (and the UK is one of them) have better earnings prospects than artists who are focused on emerging or future markets. We simulated this by creating hypothetical divisions of 100% of the plays between six markets: GB, CH, DE, NL, CZ, HU. This way we can show that it does matter where a rightsholder's music is played, as well as the actual exchange rate.
+
+```{r int-div-rev,echo=FALSE, message=FALSE, warning=FALSE,  fig.cap="Effects of International Diversification on Revenues", fig.align='center'}
+plot(effect_int_rev_plot)
+```
+
+The British market is a relatively high value market, and in our simulated portfolios the international diversification (on the same number of streams) always reduced the average or the typical (median) income and brought the best and worst performance down (See Fig.  \@ref(fig:int-div-rev)). If a rightsholder had 1000, 10000 or a million streams, it was better to have it in the UK market than in the other markets.
+
+```{r int-div-risk, echo=FALSE, message=FALSE, warning=FALSE, fig.cap="Effects of International Diversification on Risk Metrics",  fig.align='center'}
+plot(effect_int_risk_plot)
+```
+
+The returns on the same number of streams steadily decreased (see Fig.  \@ref(fig:int-div-rev)), because, as we have seen in the \@ref(streaming-price) [CEEMID-CI Streaming Price Index](#streaming-price), the prices have been decreasing over the period. 
+
+However, as expected, international exposure reduced all risk metrics somewhat. Not only did diversification reduce the absolute and standard deviation of a song’s revenues, but the foreign markets performed slightly better, and the general decrease on unit price was lower on the same portfolio. Next, we examine the contribution of the devaluation of the GBP in the period against most currencies.   
+
+## Exchange Rate Effects {#exchange-rate-effects}
+
+We are going to present earnings in GBP. However, foreign earnings are not made in GBP. When the GBP depreciates, and loses 10% of its value against the CZK, then Czech streams, ceteris paribus, bring in 10% more GBP revenues. The Czech streams are paid from Czech subscriber revenues made in Czech korunas. However, when the GBP appreciates in value against the euro by 10%, British rightsholders immediately lose 10% in GBP terms, because they must buy more expensive pounds as they convert back their German or Dutch revenues. 
+
+```{r currency-environment, fig.align='center', warning=FALSE, message=FALSE, echo=FALSE, fig.cap="Select Exchange Rates During the CEEMID-CI Index Period"}
+load ( file = file.path("plots", "exchange_rate_plots.rda") )
+plot(currency_rate_environment_plot )
+```
+
+During our observation period, i.e. the CEEMID-CI Index period, the British pound was systematically depreciating (see Fig. \@ref(fig:currency-environment)), but of course, all national currencies had their own movements. The Swiss Frank and the Hungarian Forint had depreciation periods against main currencies, including the British pound; in the latter part of the index period, the GBP was appreciating against the CHF and the HUF.
+
+The depreciation trend helped British artists during this period, and contributed to a great effect on the risk reduction and revenue loss in the portfolios of internationally competitive rightholder assets. The depreciation means that more pounds are given for an EUR or CZK stream revenue. Such trends never last forever -- exchange rates do have a strong mean-reversion characteristic. With index values for the years 2020 and 2021, we would certainly see a diminishing value of Hungarian streams, and rather great fluctuation in the value of Swiss streams, for example. 
+
+We want to show that much of the inequality in GBP earnings is related to exchange rate fluctuation. To stay with this example, when the GBP loses value against the CZK, artists with a Czech fan base win money immediately. When the GBP gains value against the euro, artists with a European (Eurozone-based) fan base lose income in GBP terms, of course, not only in Germany and the Netherlands, but also in further 17 Eurozone countries, and in Montenegro and Kosovo, too, which use the euro unilaterally.
+
+To show the extent of this factor, we created hypothetical but realistic scenarios for our simulated repertoire.  Besides using the actual exchange rate used to convert the revenues in the CI-CEEMID index, we used fictitious exchanges rates, too. These rates were simply exchange rates from a varying number of months before or after the actual payout. In this way we created fictitious exchange rate paths that were realistic, because they happened before or after the true payouts. These exchange rate scenarios therefore have a realistic volatility, mean, and median value.
+
+<!--chapter:end:04-simulation.Rmd-->
+
+# Conclusions And Recommendations
+
+There is always a hypothetical possibility that organizations with monopolistic power try to corner the market or make the playing field uneven. Because the music industry, in the absence of live performances due to the pandemic, relies critically on streaming revenues, and streaming is managed by large organizations outside of the music industry, any such problems may not even be present within the music industry itself. There are some music royalties in some countries of the world where public bodies, copyright tribunals, and other specialized institutions are taking care of potential payment problems, but music is mainly a lightly regulated business where systematic market problems must be resolved via the application of competition law [@music-streaming-level-playing-field-2021].  
+
+This is precisely one of the most important ideas behind a permanent music data observatory.
+
+## Ongoing Data Collection and Market Monitoring: The Data Observatory Concept {#observatory}
+
+The music industry requires a permanent market monitoring facility to win fights in competition tribunals, because it is increasingly disputing revenues with the world's biggest data owners. 
+This was precisely the role of the former CEEMID [@artisjus_measuring_2014] program, that was initiated by a few collective management societies after a dropped GESAC project. Starting out from three relatively data-poor countries, where data pooling allowed rightsholders to increase revenues, the CEEMID data collection program was extended by 2019 to 12 countries. It was eventually transformed to the [Demo Music Observatory](https://music.dataobservatory.eu/) in 2020 [@antal_launching_music_observatory_2021], which is now open for any national rightsholder, stakeholder organization, or music research institute. The idea of this observatory was brought to the UK policy debate on music streaming by the observatory's only (former) British users, 
+via the _Written evidence submitted by The state51 Music Group_ to the _Economics of music streaming review_ of the DCMS Committee [@dcms_state51_2020].
+
+> "There are instructive initiatives in other industries in which there is perhaps a clearer and longer standing recognition of the role of economic analysis. This sometimes results in initiatives such as ‘Observatories’ like the European Market Observatory for Fisheries an Aquatorial Products or the European construction sector observatory […] These tend to be collaborative endeavours, with a varying mix of government, industry, economists and in some cases funding bodies. […] To date there have been few if any entities or initiatives for music similar to the above-mentioned observatories. We suggest this is something that policy makers can support and encourage, but which ultimately needs to be driven by the industry itself. […]
+This is one reason we have worked with the economist Daniel Antal and his team, in particular on the Central European Music Industry Report 2020. Economists such as Daniel Antal produce data about the music industry that is consistent with international statistical standards and adhere to rigorous data ethics principles, seeking external validation through data and code repositories for underlying data and methodologies."
+
+The data observatory concept is derived from Earth and natural sciences, when often many research stakeholders build large observation stations, such as the Hubble telescope in space, or CERN. Data observatories are managed by a triangular stakeholder base of business, scientific, and policy stakeholders.
+
+The EU has been sponsoring about 60 data observatories, i.e. permanent data collection programs for policy, industrial and scientific research in various domains. These include, for example, the functioning of the milk market, homelessness, the development of alternative fuels, among many others. A similar concept has been embraced by the OECD and some UN bodies, too.  
+
+Data observatories are usually managed by a consortium of policy, scientific, and consulting users, or by a public body. In our preliminary research, we have reviewed about 60 observatories sponsored by various EU organizations and added another dozen of data observatories recognized by the Council of Europe, UNESCO, or OECD, and gathered information on defunct observatories that failed to generate a high enough value for money to be continued.
+
+We have identified various problems:
+
+- Almost no data observatory relies on any form of open data, either under the EU Open Data Directive or various definitions of scientific open data. The EU is financing many data gathering initiatives that do not even seem to consider the feel and high quality alternatives of proprietary data.
+- The quality of the data is often questionable, plagued with erros in measurement units, currency translation, and wrong labeling.
+- The data is often not machine readable, does not conform to tidy data principles, and the use of the data requires significant investment into re-processing in order to be used in statistical or spreadsheet applications.
+- Data documentation is not standardized, and often does not meet scientific or other use standards. Metadata is often ad-hoc and does not follow any international or best practices.
+
+The EU Open Data Portal is faced with similar problems. In the case of these open data initiatives, usually metadata quality is high, but the usability of the data is low. The data is processed for the public sector and it is often incomprehensible, lacking documentation that will allow it to be re-processed for new public policy, business or scientific uses.
+
+In the age of big data and AI, the data needs of small and medium enterprises, consulting agencies, universities, and policy-makers is increasing day by day. Yet, only the world’s largest companies, Ivy League universities, and rich governments can sustain comprehensive data collection programs. The EU tackles this problem with a financial injection to about 60 data observatories, providing legal access to the re-use of public sector information, and setting up various metadata portals to help accessing these data assets.
+
+Our application aims to significantly improve two serious problems: the EU makes available valuable data in a form that makes its use very difficult for the abovementioned actors; and various EU institutions spend a significant amount of their policy consulting and scientific research budgets to create data programs that do not even consider open data as a source.
+
+## AI Problems
+
+The simplest recommendation systems just follow the charts: for example, they select from well-known current or perennial greatest hits. Such a system may work well for an amateur DJ in a home party or a small local radio that just wants to make sure that the music in its programme will be liked by many people. They re-inforce existing trends and make already popular songs and their creators even more popular.
+
+Spotify’s recommendation system [@music_personalization_spotify_2016] is a mix of content- and collaborative filtering that exploits information about users’ past behaviour (e.g. liked, skipped, and re-listened songs), the behaviour of similar users, as well as data collected from the users' social media and other online activities, or from blogs. Deezer uses a similar system that is boosted by the acquisition of Last.fm -- big data created from user comments are used to understand the mood of the songs, for example.
+
+YouTube, which plays an even larger role in music discovery, uses a system comprised of two neural networks: one for candidate generation and one for ranking. The candidate generation deep neural network provides works on the basis of collaborative filtering, while the ranking system is based on content-based filtering and a form of utility ranking that takes into consideration the user's languages, for example. [@deep_youtube_recommendations_2016]
+
+These systems offer a high-level of personalization and usually re-inforce use trends, in turn discriminating users [@werner_gender_spotify_2020; @kraemer_spotify_2020]. Externally validating, or in YouTube's case even understanding how they work would be impossible -- YouTube's system uses so many resources and data that replication is impossible outside Google's systems. The deep neural networks are black-box deep learning systems that cannot be fully interpreted by humans.  
+
+A commonality across these systems is that they maximize the algorithm creators' corporate key performance indicators. Spotify wants to be ‘your playlist to life’ and increase the amount of music played during work or sports in the background, during travelling, or active music listening –- i.e. maximizing the number of hours spent using it. YouTube and Netflix have similar targets. They are in many ways like commercial radio targets, which want to maximize the time spent listening to the broadcast stream. Radios and YouTube, in particular, have similar goals because they are mainly financed through advertising. For Spotify or Netflix, their key financial motivation is to avoid users' canceling their subscriptions or changing it to different providers, such as Apple or Amazon.
+
+Local content guidelines in public broadcasting, or local content requirements informed by quotas set for commercial broadcasting are similar to utility or knowledge-based recommendation systems. A utility-based recommendation system that targets Slovakness, for example, would prefer from two playlist candidates whichever one has markers of Slovakness in the nationalities of composers, performers, or lyrical content. In this example, a knowledge-based system knows the language or the nationality of a song and creates mixes with a pre-defined Slovak rate.
+
+In a recommendation system many bad outcomes may happen that can eventually lead to lower or no payment for a rightsholder. In these cases, we are not talking about _unjustified_ differences of payment as simulated in \@ref(simulation-results) [Differences in Earngins: Simulation Results](#simulation-results), but a systematic breach of non-copyright rules that leads to an _unjustified_ lower streaming _volume_, and therefore a lower royalty payment on lower volumes:
+
+- It may recommend too few female or small country artists, or start recommending artists with hateful language.
+- It may put certain label's music on less visible places.
+- It may make the works of major labels easier to find than independent labels.
+- It puts less works and recordings on personalized lists than local content guidelines (applied in about 90 territories of the world, see [@stein_quotas_2012]) would require from competing local television or radio stations.
+- Your personalized list is filled with misleading track/artists names that are hunting for accidental streams much like click-hunting text content in search engines.
+
+These *potential* undesirable outcomes are sometimes illegal, and they may go against non-discrimination or competition law. They may undermine national or EU-level cultural policy goals. They may make Welsh artists earn significantly less than American or English artists. 
+
+In our work in Slovakia, we reverse engineered some of these undesirable outcomes. Spotify’s and YouTube recommendation system have at least three major parts, which employ machine learning from sources which include metadata:
+
+1. The user's history. Is it the user’s history that is sexist, or might the training metadata database be skewed against women?
+2. The works characteristics – are Henry Purcell’s works as well documented for the algorithm as Taylor Swift’s or Drake’s?
+3. Independent information from the internet. Does the internet write less about women artists?
+
+More often than not, the biggest problem is that the algorithm is learning from data that is historically biased against women or biased for British and American artists, or data that is only discoverable in the English language about relatively popular works that journalists have been covering. Metadata plays an incredibly important role in supporting or undermining the general music education, media policy, copyright policy, or competition rules. If a streaming providers's algorithm does not know the music that music educators or parents find suitable for teenagers, then it will not recommend that music to your children. Parental control algorithms may filter out harmful content for children, but will not play a more proactive role without deliberate involvement of public bodies into documenting children-friendly works. 
+ 
+Until now, in most cases, it was assumed that it is the artists or their representatives' duty to provide high quality metadata; and in mass uses, like in radio or television broadcast, collective management organizations were taking care of the process with appropriate data and IT knowledge. But streaming services usually bypass (with some exceptions) collective management organizations. Small organizations and individual, self-publishing authors do not have an appropriate level of data literacy to provide relevant metadata. What's worse, they cannot scale up the production and validation of metadata. Metadata errors can easily be captured by machine learning algorithms if those algorithms are trained on hundreds of thousands of work/recording records -- a precious resource that only large labels, publishers, or collective rights management organizations possess. [@ssrn3785272]
+
+In some cases, it is well understood that some public investment is needed to maintain metadata records for each new technological innovation. While the works of Henry Purcell are eternal, played and re-recorded centuries after his death, neither he nor his heirs receive copyright royalties. If we want to correctly document his works for newer and newer AI-driven technologies, somebody must do this investment. Investment into documentation of cultural heritage, for example, by specialist public libraries is not a novel idea. However, extending this public service to the long-tail of living artists, or heirs who still enjoy copyright protection may be necessary if we want to give them an equal chance on streaming services. As explored in this report, often works earn only pennies over years, which does not even cover the costs of documenting these works. If rightsholders believe that works and recordings in the long-tail should have an equal chance to be re-discovered, heard and paid, then considerable public or philanthropic investment may be needed.
+
+<!--chapter:end:05-conclusions.Rmd-->
+
+# Appendix {-}
+
+## Technical Notes {-}
+
+The simulations were made in the R language [@R-base] using the *Tidyverse* packages [@tidyverse2019] of *dplyr*, *tidyr* and *purrr* [@R-dplyr; @R-tidyr; @R-purrr] for data processing and *kableExtra* for the tables [@R-kableExtra]. 
+
+For visualisation, *ggplot2* and *scales* was used [@R-ggplot2; @R-scales] . The document was compiled with *rmarkdown*, *bookdown* and *knitr* [@rmarkdown2018; @R-bookdown; @R-knitr]. 
+
+## Acknowledgements {-}
+
+
+<!--chapter:end:09-appendix.Rmd-->
+
