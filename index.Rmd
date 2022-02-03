@@ -70,8 +70,8 @@ If the CMA believes that the relevant product market is music streaming, and not
 
 Our Digital Music Observatory has been a proponent of making the market analysis internationally comparable and transparent.  The Digital Music Observatory full-market model on the volume side is based on the statistical standards [@frank_guy_essnet-culture_2012] and IFRS Fair Value standards [@ifrs_fair_value_2011; @commission_regulation_2012_1255]. Its understanding of price (which often cannot be directly observed, only calculated from revenues and volumes) was partly based on _Valuing the use of recorded music_, an excellent methodological guide created by PriceWaterhouseCoopers for IFPI [@pwc_valuing_2008], and the various globally applicable WIPO and IFRS standards [@ifrs_fair_value_2011; @flignor_orozco_ip_valuation_2006; @puca_intangible_2019] on valuing copyrights in more practical terms for the music industry.  
 
-```{r fullmarket, include=FALSE, fig.cap="A simplified introduction of our understanding of licensed and not-licensed uses of music in various European countries."}
-knitr::include_graphics(file.path("plots", "full_market_example.jpg"))
+```{r fullmarket, message=FALSE, fig.cap="A simplified introduction of our understanding of licensed and not-licensed uses of music in various European countries."}
+knitr::include_graphics(here::here("plots", "full_market_example.jpg"))
 ```
 
 At least in the markets analysed with this comprehensive tool originally developed for price setting in music markets, and took prices and quantities, harmonized to the same units, we would not subscribe to the market definition of the CMA Scoping Report.  What we have found in Hungary (repeatedly in several years) is that music streaming was more closely resembling the broadcasting and retransmission segment than the UUC segment.  This empirical observation can be well explained with the underlying regulation: in broadcasting/retransmission and music streaming the music is licensed, following the fair valuation standards and intellectual property standards.  In the observed period, UUC was not licensed in this sense, and as the scoping report correctly states, its prices are ex post set. 
@@ -88,13 +88,9 @@ Eventually, we believe that this question must be addressed with the analysis of
 
 Overall, we would not use the current relevant product/market in the scoping report, instead, our initial hypotheses would be pair-wise comparison of the integration of the broadcasting/retransmission, the physical (mechanical licensing), and the licensed streaming and UUP segment.  We believe that music in the radio, in music televion, vinyl and CD, home copyied files, and streaming subscriptions and UUC are competing with each other.  In our experience, streaming has no dominant role, and probably not even a leading role in the consumers music use basket.
 
-
-
 ## Assessing the geographical market definition {.unnumbered}
 
 We assume from the language of the scoping report that the DCSM’s working definition is that of a UK national relevant market. In our experience with competition law-based market analysis in other jurisdictions, this is indeed the best point of view, but only when a broader recorded music industry is considered. Nevertheless, we have experienced in the [Music Creator Earnings' Project](https://www.gov.uk/government/publications/music-creators-earnings-in-the-digital-era/) initiated by the UKIPO that currently the British music industry is so interwoven with the national music industry, that it is next to impossible to obtain relevant market figures for the United Kingdom alone. Our paper is based on a report that we made within the scope of this project, but which has only found a place in a single paragraph and a footnote of the *Music creators’ earnings in the digital era* report and was paid for but published as an accompanying document *independently* of the main report. We have shown that against the commonly held view that the music streaming brought growth back to (recorded) music, for most UK entities, revenues were flat at most in the period of 2015-2019, and even this was due to the depreciation of the GBP that inflated the dollar, euro, and yen based revenues.
-
-
 
 ## Lack of market transparency {.unnumbered}
 

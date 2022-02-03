@@ -36,8 +36,8 @@ Comparing  royalties is challenging because some royalties are paid upfront and 
 
 The CEEMID full-market model (introdcued in [Music Use and Rightsholder Damages](#music-use) and [Enjoyment of Audiovisual Content and Rightsholder Damages](#av-use)) was partly based on _Valuing the use of recorded music_, an excellent methodological guide created by PriceWaterhouseCoopers for IFPI [@pwc_valuing_2008]. In our understanding, similar valuations presented here in this short example must meet high statistical standards [@frank_guy_essnet-culture_2012] and IFRS Fair Value standards [@ifrs_fair_value_2011; @commission_regulation_2012_1255] which had been adopted into EU law. 
 
-```{r royalties, eval=FALSE, echo=FALSE, fig.cap="Breaking Up Music Enjoyment Hours" }
-knitr::include_graphics(file.path('plots', 'listen_hours_by_license_16x9.jpg'))
+```{r royalties, eval=FALSE, echo=FALSE }
+knitr::include_graphics(file.path('plots', 'full_market_example.jpg'))
 ```
 
 This was the framework that CEEMID, a cooperation of several European rightsholders including SOZA started to develop, when they started to cooperate on meeting the data requirements of these valuation techniques. It was used for royalty pricing and compensation claims in Hungary [@antal_szabad_2017_en; @antal_szabad_2018_en], Slovakia [@antal_slovenskom_hudobnom_2019_en] and Croatia [@antal_pcr_croatia_2019] are comparing per hour royalty revenues in various licensing and compensation models, therefore providing a common metric for mechanical, public performance, streaming and private copying compensation revenues. 
