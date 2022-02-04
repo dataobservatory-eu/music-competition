@@ -8,7 +8,7 @@ Both organizations collect (rather different) international data which is only a
 
 In competition policy, a relevant market is a market in which a particular product or service is sold---an intersection of a relevant product market and a relevant geographic market. This concept is particularly useful in our case, because music has no clear-cut product, service, or geographical market.
 
-### Relevantproduct: the analysis of the value chain
+### Relevant product: the analysis of the value chain
 
 A relevant product market comprises all those products and/or services which are regarded as interchangeable or substitutable by the consumer by reason of the products' characteristics, their prices and their intended use---experience and research in other countries shows that music streaming can be substituted with other, differently licensed music, for example, listening to music via the media platform YouTube, or from mp3 files. Even the sale of physical music products, such as microcasettes and CDs, can be substituted with music services such as streaming subscriptions. 
 
