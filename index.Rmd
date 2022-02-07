@@ -37,7 +37,7 @@ linkcolor: blue
 link-citations: yes
 nocite: |
   @R-bookdown, @R-ggplot2, @R-kntir, @puca_intangible_2019
-description:  "This is is a versioned, dynamic,  work-in-progress publication, available from the Zenodo open science repository. It is built upon the    actual application of competition law in non-UK jurisdictions, and it is intended for further research and publication. After reviewing some methods to empirically collect data about quantities, prices, market shares and market power in the music markets, we present some ideas on the definition of music markets."
+description:  "This is is a versioned, dynamic,  work-in-progress publication, available from the Zenodo open science repository. It is built upon the actual application of competition law in non-UK jurisdictions, and it is intended for further research and publication. After reviewing some methods to empirically collect data about quantities, prices, market shares and market power in the music markets, we present some ideas on the definition of music markets."
 ---
 
 # Executive Summary {-}
@@ -112,3 +112,9 @@ This paper grew out of the analysis we have provided for the *Music Creator Earn
 We hope that our paper will be a useful contribution to understanding the music markets of the United Kingdom, and contribute to several important questions: 
 - We hope that our *full market comparator model* is a useful tool to map all the quantities, revenues and implied prices of the music value chain, and understand the potential of supply- and demand side substitution in the market.
 - Correctly attributing the revenues of small undertakings to the appropriate timeframe and geographical segment, and applying the correct exchange rate can bring much clarity to the relative performance of the UK undertakings domestic and export markets. 
+
+This document is a work in progress. Please cite this version as:
+
+Daniel Antal. (2022). The Relevant Market for Music Streaming: Market Definition and Measurement Challanges (Version 20220207). Zenodo. [https://doi.org/10.5281/zenodo.6000537](https://zenodo.org/record/6000537#.YgGcfurMLIV)
+
+Our refer to the Github repo: [https://github.com/dataobservatory-eu/music-competition](https://github.com/dataobservatory-eu/music-competition)

@@ -1,8 +1,6 @@
-# README: An Empirical Analysis of Music Streaming Volumes, Revenues and Their Market Conditions
+# README: The Relevant Market for Music Streaming: Market Definition and Measurement Challanges
 
-Do not use or cite this report yet.  It is a preliminary document based on [An Empirical Analysis of Music Streaming Revenues and Their Distribution](https://reprex.nl/publication/mce_empirical_streaming_2021/) and will go through a very thorough re-editing, leaving irrelevant parts out, and adding more relevant parts from a competition economics and competition law point of view.
-
-The new working paper **An Empirical Analysis of Music Streaming Volumes, Revenues and Their Market Conditions** in making is placed on [music-competition.dataobservatory.eu](https://music-competition.dataobservatory.eu/)
+Our dynamic [The Relevant Market for Music Streaming: Market Definition and Measurement Challanges](https://music-competition.dataobservatory.eu/) document is a versioned work-in-progress publication, available from the Zenodo open science repository. It is built upon the actual application of competition law in non-UK jurisdictions, and it is intended for further research and publication. After reviewing some methods to empirically collect data about quantities, prices, market shares and market power in the music markets, we present some ideas on the definition of music markets.
 
 ## Folders
 
