@@ -1,4 +1,4 @@
-# Availability of Market Information {#empirical}
+# Challenges of Empirical Observation & Estimation {#empirical}
 
 The highly globalized music industry generates two important international reports, as well as several national reports, but these are not suitable for the analysis of the typical or average rightsholder, nor for small labels and publishers who do not represent a large and internationally diversified portfolio of music works or recordings. Copyright and neighboring right revenues are collected in national jurisdictions. Because BUS  artists are almost never constrained by their use of language, and the UK Music Industry is highly competitive in the global music markets, even relatively less known rightsholders earn revenues from dozens of national markets. The lack of market information on music sales volumes, prices for each jurisdiction, and the unaccounted for national, domestic, and foreign revenues makes the analysis of the rightholder’s earnings, or the economics of a certain distribution channel like music streaming or media platforms, impossible.
 
@@ -74,9 +74,7 @@ The Digital Music Observatory has been following the methodological guidlines of
 
 The ICET model is based on a long history of quantitative sociology and media research which has almost 50 years of research history. It is a well-established methodology. For more details on the ICET model and conducted cultural access and participation surveys with it see [@de_haan_virtuele_2008; @de_haan_nowadays_2012]. Following the ICET model, we created surveys that had been measuring the missing variables in a way that they could be related to transactions.  (The ICET abbreviation stands for information, communication, enjoyment and transactions.) 
 
-Rightsholders often have full or near-full transaction details for market-based cultural activities, such as sales of books or concert tickets. However, private copying is not a market-based activity, and there are no sales logs present. The problem with these data sources is that they are business confidential, fragmented, and they are lacking a common collection methodology.  
-
-
+Rightsholders often have full or near-full transaction details for market-based cultural activities, such as sales of books or concert tickets. However, private copying is not a market-based activity, and there are no sales logs present. The problem with these data sources is that they are business confidential, fragmented, and they are lacking a common collection methodology. 
 It is possible to integrate this data (we will turn to this problem shortly), but often it is more useful to collect more aggregated forms of data. 
 To arrive to a common demoninator of users and uses, we have been calculating notional hours of music enjoyment in the forms of attending concerts, listening to radio or streaming services, or the respondents record collection. While self-reported surveys tend to be biased, they are consistently biased.  They may overstate the actual hours of use, as people like to report higher cultural participatoin than they actually engage in, but such data is not biased when expressed as the market share of radio transmission and licensed music streaming. 
 

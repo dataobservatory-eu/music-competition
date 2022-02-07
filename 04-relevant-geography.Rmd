@@ -1,6 +1,6 @@
-# Price Disintegration: Timeframe and Functional Currency Problems {#simulation-results}
+# Domestic, National, Export Revenues, Currency Translations & Related Measurement Problems {#simulation-results}
 
-## Timeframe of analysis (#case-study-timeframe)
+## Timeframe of analysis {#case-study-timeframe}
 Most works and recordings are used in any earnings period. In the case of certain rights, such a public performance rights in television or radio, retransmission rights, royalties are accumulated throughout a year, and paid out once. In music streaming services, some pay-outs are accumulated during a calendar month, others throughout a year or multiple years (particularly collectively managed composer rights in some jurisdictions.) Because some earned royalties are very small, royalty management organizations do not pay out but accumulate earnings where money transfer and accounting costs would be larger or would take most of the payout.
 
 In our case study we chose to compare the comparison of annual revenues, bearing in mind that this may lead to smaller or greater inconsistencies, particularly in cases when royalties are paid once in lump sum. A more precise valuation would require many years of historical data that is not available in the Slovak Republic.
