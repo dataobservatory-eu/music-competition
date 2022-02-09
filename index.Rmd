@@ -1,6 +1,6 @@
 --- 
 title: "The Relevant Market for Music Streaming: Market Definition and Measurement Challenges"
-subtitle: "Working Paper. DOI 10.5281/zenodo.6000537"
+subtitle: "Working Paper. DOI 10.5281/zenodo.6026739"
 author: "Daniel Antal, CFA"
 date: "2022-02-07"
 site: bookdown::bookdown_site
