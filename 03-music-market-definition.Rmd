@@ -12,16 +12,44 @@ The music industry is a very global industry, and these international standards 
 
 In a competition-based market study, the aim may not be the investigation of price setting, however, understanding the empirical difficulties in setting the prices is important to understand the difficulties and opportunities for any form of market analysis.
 
-## The use of zero prices
+## Platform-specific considerations
 
-The advertising-funded business model is not novel, nor is it inherently
-problematic from a competition perspective. Newspapers have been
-generating revenue in the UK through advertising for several hundred years.
-On television, ITV provided the first alternative to the BBC in 1955,20 when it
-began its ad-funded broadcasting. Similarly, commercial radio stations have
-been generating revenue through advertising in the UK ever since the market
-was liberalised in 1973.21 These services have added substantial value to our
-society. The same is true of many services provided by digital platforms [@cma_online_platforms_advertising_2020, pp. 44--45]
+### UUC
+
+We argue that UUC platforms are not directly comparable to other licensed forms of music uses.  Until recently, the biggest UUC platform, YouTube, has claimed that it is not "communicating to the public" music, it is merely a neutral player between the user who uploads the content and the other user who uses it. In the past decade, there has been an important and contentious debate weather this position is in line with the "safe harbour" exceptions of copyright law, and if the compensation and piracy protection provided by YouTube is sufficient.
+
+In the UK, YouTube is a major UUC service, and is popular among those who
+use free streaming services (UUC or otherwise) to listen to music (in 2021,
+69% of such users had used YouTube).53 Other UUC services with a music
+focus include TikTok and SoundCloud. 
+
+The representative associations of composers [@gesac_regulatory_2015; @gesac_copyright_2015; @cisac_cisac_2017], performers [@aepo-artis_give_2016; @aepo-artis_comments_2017], and producers [@moore_value_2016] in Europe were all strongly calling for a change in these practices, while technology companies on the other side were vehemently lobbying European governments and members of the European Parliament to stop or water down proposals. Eventually the European Union adopted the new Copyright Directive  [@eu_directive_2019_790]. This directive intends to bring the licensing practice of music streaming and UUC platforms closer to each other.
+
+As the CMA scoping statement states, in the UK the "DCMS Committee Report raised concerns that ‘safe harbour’ provisions that apply to UUC services may distort competition among music streaming services (due to a disparity in the dynamics of rights negotiations) and lead to a ‘value gap’ that reduces the revenues available to rightsholders." The scoping report also states that CMA intends to analyse the  "impact of UUC music streaming services, and the safe-harbour copyright protections they benefit from (see paragraphs 70 to 74) on competition in music streaming services, including whether such services enhance competition or have distortionary effects on competition that harm consumers". 
+
+We have conducted a similar analysis in other jurisdictions which so far has not been litigated. Our experience shows that this analysis is rather different from the analysis of music streaming, and should be seen as a potentially different form of music use.
+
+On 22 June 2021, the Court of Justice of the European Union (CJEU) made a preliminary ruling upon request from the German Federal Court of Justice in relation to two proceedings concerning unauthorised uploading of copyrighted content to YouTube and to another file sharing system (the YouTube/Cyando Case). This decision has significance for the United Kingdom, because it is still based to the new EU Copyright Directive’s predecessor, the Information Society Directive 2001/29/EC (the InfoSoc Directive), and to the Electronic Commerce Directive 2000/31/EC (the e-Commerce Directive), which have been incorporated into UK law and jurisprudence, and it is likely that UK courts will at least take into consideration this ruling. 
+
+This ruling makes it clear that the business model and practice followed by YouTube is shielded from platform (copyright) liability, and therefore creates a very different use than other business uses of music which are based on copyright/neighboring right law and the traditional licensing formats [@wise_ibbetson_2022]. 
+
+Our analysis in competition law based cases excluded YouTube and other UUC companies from the market of licensed uses of music, because we have found the business and legal model, and the empirically observed prices very dissimilar from other forms of music. Not only we have estimated much different (lower) implied prices than in other forms of music use, but we also did not really find any mechanism that would bring the prices closer via supplier-side substitution.  Part of the heated debate on UUC platforms and the *value gap* is that rightsholders do not give a prior consent to the use of their music, can only protest and take down the copies; however, because of the role the platforms play in music discovery and use, takedown is not a credible strategy for individual or small rightsholders.
+
+In our experience, we have estimated a significant value transfer from the licensed music market to UUC, but we have never seen relevant UK data. The ambition to investigate the *value gap* certainly requires a very broad scope of music uses, probably including other forms of zero price uses, including home copying. We do not believe that the UUC model is sufficiently similar to licensed music streaming and mechanical licensing to physical products on one hand, but dissimilar from public performance, particularly in radio and television, to justify the current value chain definition and scope of the CMA market study.
+
+### The use of zero prices
+
+A particularly difficult aspect of empirically observing music markets is the prevailance of zero end-user (consumer) prices, which is present in radio, television, in UUC, home copying, and even in the minority uses of licensed (ad-supported) music streaming. Our analysis in non-UK markets showed that the majority of music uses takes place in zero price conditions.
+
+As the CMA report on platform notes, the "The advertising-funded business model is not novel, nor is it inherently problematic from a competition perspective. Newspapers have been generating revenue in the UK through advertising for several hundred years. On television, ITV provided the first alternative to the BBC in 1955, when it began its ad-funded broadcasting. Similarly, commercial radio stations have been generating revenue through advertising in the UK ever since the market was liberalised in 1973. These services have added substantial value to our society. The same is true of many services provided by digital platforms" [@cma_online_platforms_advertising_2020, pp. 44--45].
+
+In many jurisdictions, home copying is an exception to copyright law.  In such jurisdictions governments provide a compensation mechanism to righsholders to the loss of revenue to home copying. Such an exception was briefly introduced in the United Kingdom in 2014, only to be crushed by UK courts in 2015. The lack of this exception theoretically would make it possible that UK rightsholders make claims to households on the basis of infringing their rights. Regardless of legal status of home copying in the United Kingdom, we find it difficult to believe that households are not engaging in home copying---in other surveyed jurisdiciont, including rather recently the UK, we have found that this is still practice widely. 
+
+Our argument is not for or against private copying exceptions or UUC, but we merely state the fact that the majority of the music uses takes place on the basis of various legal situtions and a zero price. 
+
+While there is a growing body of consensus and practice on how to incorporate zero price transactions into competition practice in theory, in practice we have found this very challenging because there is no primary data source on these uses. Zero price transactions have no invoices, and no accounting trail. This is a serious problem, because in normal market conditions, both the quantity of the sales and the price is recorded on the invoice, and this information is translated into tax returns and financial statements.  
+
+The methodology we introduce in the subsequent chapters were designed to provide adequate estimates for various forms of zero-price transaction, includig the use of UUC platforms, radio, and home copying. 
 
 ## Fair Value {#fair-value}
 The concepts of copyright law, such as equitable remuneration, set a legal basis for the remuneration of creators, particularly in cases where the seller has no freedom of contracting the actual user.  Such rules, however, do not contain regulations on how to set the paiable sum---this often leads to a confusion. In the United Kindgom in 2020-21 there had been a lively debate about various forms of equitable remuneration. Yet it is not the equitable remuneration right that tells what should be the price applied when an artist is paid out.
@@ -70,7 +98,7 @@ The publishing and recording side of the industry has two mature business models
 
 The streaming model is *de facto* harmonized by the fact that the major players in the world are the same, and they are using similar model contracts.  Legally speaking, the solutions differ among the UK, U.S., and EU solutions, but the streaming model is always hybrid of the mechanical licensing and the public performance models. A streaming provider needs to have a license from both the publishing side (that is present in mechanical licensing) and all interested parties that are present in public performance licensing.
 
-The UUC model, as recognized by the scoping report, is very different.  The EU DCM directive makes licensing compulsory, in other jurisdictions, UUC providers (mainly YouTube) have a form of voluntary licensing scheme that is very different in many aspects from the mechanical, public performance or streaming licenses. 
+The UUC model, as recognized by the scoping report, is very different.  
 
 Price observation (estimation) and comparison is challenging. Traditionally, public performance licenses are blanket licenses that cover any use for a set period (usually a year), but these blanket revenues are distributed by the collective management organizations by radio transaction logs, or samples of such logs.  So, the payment is not directly connected to a single use, and much data would be required to calculate the implied price per use. Our approach is to calculate an implied hourly price per user. 
 
@@ -82,7 +110,7 @@ The translation of various prices to GBP/listening hour or HUF/listening hour re
 
 As our experience showed in Hungary, Slovakia, and Croatia, even though in these use cases, there are legal mechanisms that should allow the prices to converge to each other --- after all, our model is a price-setting model for royalties originally—the prices can greatly deviate.  Some countries have not adjusted their home copying compensation for a long time, or there is some local regulatory interference (like in the U.S.) with radio licensing.  But at least on the level of the international legal norms and the model contracts, we can expect some sort of convergence that allows using the prices of any other use as a comparator for any analyzed use. 
 
-In an EU jurisdiction, before the implementation of the DSM Directive, we can objectively exclude the UUC model from this comparison, as there is no similar licensing model that would allow price convergence.  In our Hungarian experience, the UUC prices observed were 90-97% different from other prices in the model, and we had to exclude them as valid comparators. In the UK, the legal reason is stronger, as the UK Intellectual Property Office has only started to investigate to introduce some elements of the DSM Directive under a different legal basis into UK law.  [it would be good to know if YouTube did not change in the UK to the same practice as it is turning now to in the EU.]
+In an EU jurisdiction, before the implementation of the DSM Directive, we can objectively exclude the UUC model from this comparison, as there is no similar licensing model that would allow price convergence. 
 
 Our solution in the Hungarian and Slovak models was to report figures with and without the inclusion of UUC, which was dominated by the use of YouTube. As a base case, we excluded UUC uses from the market comparators as there was no sufficient price harmonization and our a sufficiently similar contracting practice, or legal basis for the revenues.
 
@@ -100,33 +128,6 @@ The [scoping paper] correctly excludes the analysis of equitable remuneration fr
 
 It is sufficient to note that equitable remuneration is not a pricing issue, but it is an important legal mechanism to make sure that copyright and neighboring rightsholders are remunerated. In spite of the national differences, it is a sufficiently harmonized system that allows the functioning of the global music industry without major barriers, and therefore allows the comparison of revenues, prices and volumes, too. 
 
-## Unlicensed streams and the value transfer to internet platforms {#unlicensed}
-
-Value transfer is undermining mechanical licensing, public performance, mixed streaming licenses, and even compensation values for home copying. They offer a cheaper platform for viewers than licensed onces, which moves the basis of potentially royalty earning revenues towards the media platform. We have measured this effect in several European countries, and we have found this to be far more significant than the potential redistribution effect from pro-rata streaming distribution (see the next \@ref(distribution-rules) subchapter) or the redefinition of the equitable remuneration right (subchapter \@ref(equitable-remuneration)). 
-
-1. Unlicensed uses create competition to the business-to-business users of music, audiovisual content, books and other copyright protected content. For example, television stations and radio stations lost audiences to YouTube, because YouTube could offer programming "for free",  as it paid only about 1-10% of the similar royalties of broadcasters for content. This means that advertising revenue moved from TV and radio stations to YouTube. This revenue should have been shared with rightsholders by the broadcasters.
-
-2. The availability of unlicensed platforms, such as YouTube, that claims not to be a streaming platform, and pirate websites reduced demand for licensed, legalized use of copyright protected content. The lower sales volumes and the direct loss of advertisement revenues reduced the market price of content.
-
-3. Because private copying remuneration must be based on market values of music, filmed content, literary works, and other works, it is important that we enumerate the price loss due to illegal activities, so that the damage claim is truly based on arm's length rather than  illegal market transactions.
-
-We were not provided with data to estimate the size of the value transfer in the United Kingdom, but given the global nature of the music ecosystem, we do not believe that the British rightsholders are affected differently than European ones. Partly, because a large part of the British revenues are export revenues to the European Union, and partly because unlicensed media platform are competing precisely in the same manner in the UK with licensed public performers or streaming platforms like in other countries. We believe that the existence of the value transfer is one of the sources of the declining value of music shown in subchapter \@ref(streaming-price), but we have not attempted to estimate the size of this effect. However, our detailed data in Hungary, Croatia, and Slovakia suggest that the value transfer amounts to 10-20% of the total music market value.
-
-
-
-
-
-During the creation of this report a legislative process is under way to implement a new European legislation that aims to close the value transfer to unlicensed media platforms. Media platforms, like YouTube, unlike licensed music streaming services like Spotify, Deezer, Apple Music or licensed audiovisual services like Netflix, did not get a license from rightsholders for the use of their music, audiovisual content, literary or artworks. Their objection to such licenses were based on the safe harbor of copyright law mandated by the U.S. Congress to help the evolution of internet businesses. 
-
-The representative associations of composers [@gesac_regulatory_2015; @gesac_copyright_2015; @cisac_cisac_2017], performers [@aepo-artis_give_2016; @aepo-artis_comments_2017], and producers [@moore_value_2016]  in Europe were all strongly calling for a change in these practices, while technology companies on the other side were vehemently lobbying European governments and members of the European Parliament to stop or water down proposals. Eventually the European Union adopted the new Copyright Directive  [@eu_directive_2019_790].  In the next two years all member states need to transpose it to national law.  It is very important that to give similar weight to modernizing the private copying remuneration and the value transfer to bring Slovak artists' and producer's revenues closer to the normal, European equitable remuneration.
-
-In the context of the home copying, value transfer does not only undermine licensing to television and radios, but it also undermines the home copying compensation  scheme, too.
-
-1. Unlicensed uses create an unlawful compensation to the business-to-business users of music, audiovisual content, books and other copyright protected content.  For exampe, televison stations and radio stations lost audiences to YouTube, because YouTube could offer programming "for free',  as it paid only about 1-10% of the similar royalties of broadcasters for content. This means that advertising revenue moved from TV and radio stations to YouTube.  This revenue should have been shared with rightsholder by the broadcasters.
-
-2. The availability of unlicensed platforms, such as YouTube, that claims not to be a streaming platform, and pirate websites reduced demand for licensed, legalized use of copyright protected content.  The lower sales volumes, and the direct loss of advertisement revenues reduced the market price of content.
-
-3. Because the private copying remuneration must be based on market values of music, filmed content, literary works, and other works, it is importnat that we enumerate the price loss due to illegal activities, so that the damage claim is truely based on arm's length market transactions, and not illegal transactions.
 
 
 ### Private Copying and Illegal Activities {#illegal}
