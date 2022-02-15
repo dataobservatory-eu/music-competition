@@ -2,10 +2,7 @@
 title: 'The Relevant Market for Music Streaming: Market Definition and Measurement
   Challenges'
 author: "Daniel Antal, CFA"
-date: '2022-02-07'
-output:
-  pdf_document: default
-  word_document: default
+date: '2022-02-15'
 site: bookdown::bookdown_site
 documentclass: book
 lof: yes
@@ -46,7 +43,7 @@ description: This is is a versioned, dynamic,  work-in-progress publication, ava
   and publication. After reviewing some methods to empirically collect data about
   quantities, prices, market shares and market power in the music markets, we present
   some ideas on the definition of music markets.
-subtitle: Working Paper. DOI 10.5281/zenodo.6026739
+subtitle: Working Paper. DOI 10.5281/zenodo.6088844
 ---
 
 # Executive Summary {-}
@@ -87,8 +84,9 @@ Our dynamic [The Relevant Market for Music Streaming: Market Definition and Meas
 
 The statement of scope for the CMA Music and streaming market study [@cma_market_study_scope_2022] intends to explore a range of questions that require empirical economic evidence. The gathering of such evidence requires a formal market definition (in simple terms: “Who, which sellers and which buyers should be contacted for evidence?”). This is very challenging for two reasons: a) the majority of the uses has a zero-price and no accounting trail b) the sales are global and most music enterprises do not have a sophisticated accounting practice to report their revenues for geographic segments. 
 
-```{r meanpriceplot, echo=FALSE}
-knitr::include_graphics(here::here("plots", "mean_price_plot.png"))
+```{r valuechainfigure, echo=FALSE}
+knitr::include_graphics(here::here("plots", "Music_value_chain.png"))
+#knitr::include_graphics(here::here("plots", "mean_price_plot.png"))
 ```
 
 The scoping statement claims that "music streaming services are now the predominant means of music consumption, supplanting traditional physical media such as CDs and vinyl." We believe that this statement should be seen as a starting hypothesis, and not as fact. It is not evident how it can be tested against empirical evidence, and it also appears to contradict how the music value chain is understood in the United States [@hull_music_2011] or in Europe [@leurdijk_statistical_2012-1; @leurdijk_statistical_2012]. If we apply the UK version of the relevant market definition [@office_of_fair_trading_market_2004], starting with music streaming as the focal product, it would be very difficult to justify the exclusion of radio and television broadcasting and retransmission as potential substitutes for the use of music streaming services or physical media. We believe that there is sufficient demand- and supply side substitution taking place among licensed streaming, radio broadcasting and retransmission at least that pricing practices of the industry treat these alternative sales channels as market comparators for each other. On the other hand, while the scoping report states the ambition to investigate the potential ‘value gap’ towards UUC platforms and their role in the music market, we would like to weigh in with the evidence of jurisprudence, business practices and empirically observed prices that UUC is rather dissimilar to licensed “music services … and traditional physical media such as CDs and vinyl.”
@@ -103,18 +101,15 @@ Our paper proposes our *full-market comparators model* for the analysis of the U
 
 In the market where we have conducted detailed surveys, the biggest volume of music was used in zero-price forms–mainly in radio, followed by UUC streaming, home copying, but also ad-supported music streaming had measurable market shares. The music use overlaps with commercialized forms of music consumption, and participation on non-commercialized or even illegal uses (such a liturgical music, authentic folk music, and some no longer protect classical works, or home copying, which is exempted from copyright law in most European markets, but not in the United Kingdom.) 
 
-When consumer prices are zero, the implied prices must be calculated based on the revenues collected by the platform to finance this supply and the volume of the consumption. One problem may be that the relevant revenue is not available–for example, YouTube is not calculating or making available its advertising revenues for most national jurisdictions, because those revenues fall below the threshold where such disclosure would be mandatory under its accounting standards.
-
-```{r medianquantity, echo=FALSE}
-knitr::include_graphics(here::here("plots", "medianquantity-1.png"))
-```
-Following best statistical practice, we use the ICET model and the so-called cultural access and participation surveys to capture the use of paid and not paid, commercial and non-commercial uses of music in a systematic way [@frank_guy_essnet-culture_2012; @de_haan_virtuele_2008; @de_haan_nowadays_2012]. While CAP surveys give a biased measurement of use hours, we do not see evidence that they give a biased estimate of use ratios, which is necessary for our models’ weights. With almost no exception, in the music markets we could observe or estimate revenues, but not prices. We always gave a priority to the use of observable market transactions [@ifrs_fair_value_2011; @commission_regulation_2012_1255], but these transaction were usually not available in full detail. Our model's understanding of price (which often cannot be directly observed, only calculated from revenues and volumes) was partly based on _Valuing the use of recorded music_, an excellent methodological guide created by PriceWaterhouseCoopers for IFPI [@pwc_valuing_2008], and the various globally applicable WIPO and IFRS standards [@ifrs_fair_value_2011; @flignor_orozco_ip_valuation_2006; @puca_intangible_2019] on valuing copyrights in more practical terms for the music industry.  
-
-```{r fullmarket, message=FALSE, fig.cap="A simplified introduction of our understanding of licensed and not-licensed uses of music in various European countries."}
+```{r fullmarket, message=FALSE}
 knitr::include_graphics(here::here("plots", "full_market_example.jpg"))
 ```
 
+When consumer prices are zero, the implied prices must be calculated based on the revenues collected by the platform to finance this supply and the volume of the consumption. One problem may be that the relevant revenue is not available–for example, YouTube is not calculating or making available its advertising revenues for most national jurisdictions, because those revenues fall below the threshold where such disclosure would be mandatory under its accounting standards.
+
 As one can see from our graphic figures, the music business has a particularly complicated value chain, because music is a copyright-based intellectual property with a very complex licensing system. Each music recording is a bundle of copyrights and neighbouring rights, which are often remunerated separately. Furthermore, in terms of the largest volume of use, the user is not paying for it directly. This makes the empirical analysis particularly challenging.
+
+Following best statistical practice, we use the ICET model and the so-called cultural access and participation surveys to capture the use of paid and not paid, commercial and non-commercial uses of music in a systematic way [@frank_guy_essnet-culture_2012; @de_haan_virtuele_2008; @de_haan_nowadays_2012]. While CAP surveys give a biased measurement of use hours, we do not see evidence that they give a biased estimate of use ratios, which is necessary for our models’ weights. With almost no exception, in the music markets we could observe or estimate revenues, but not prices. We always gave a priority to the use of observable market transactions [@ifrs_fair_value_2011; @commission_regulation_2012_1255], but these transaction were usually not available in full detail. Our model's understanding of price (which often cannot be directly observed, only calculated from revenues and volumes) was partly based on _Valuing the use of recorded music_, an excellent methodological guide created by PriceWaterhouseCoopers for IFPI [@pwc_valuing_2008], and the various globally applicable WIPO and IFRS standards [@ifrs_fair_value_2011; @flignor_orozco_ip_valuation_2006; @puca_intangible_2019] on valuing copyrights in more practical terms for the music industry.  
 
 We assume from the language of the scoping report that the DCSM’s working definition is that of a UK national relevant market. In our experience with competition law-based market analysis in other jurisdictions, this is indeed the best point of view, but poses its own challenges. As we have shown in the [Music Creator Earnings' Project](https://www.gov.uk/government/publications/music-creators-earnings-in-the-digital-era/) initiated by the UKIPO, the British music industry is so interwoven with the national music industry, that it is next to impossible to obtain relevant market figures for the United Kingdom alone.
 
@@ -122,11 +117,15 @@ The new platforms that make music available for literally billions of people are
 
 Most undertakings of the music industry, wherever they are located in the value chain, are micro- or small enterprises, and therefore enjoy the benefits of simplified tax returns, exemption from most mandatory statistical filings, and the disclosures of simplified financial statements.  Unfortunately, these are the actual sources of official government economic statistics, which, therefore, exclude the music industry. The best-known music industry reports are created by membership-based trade organizations with surveying these microenterprises. The management information systems and accounting systems of these microenterprises are usually not sophisticated enough to record revenues by geographic segments, or to apply an auditable use of currency translations --- in fact, most music enterprises are so small that they do not audit their disclosures. In business practice, often a mixture of global income is reported with an unknown currency weighting. Some revenues are earned in GBP, others in the major currencies, i.e., USD, EUR, JPY, but even a small UK entity may have some revenues that are earned in more than a hundred other national currencies.
 
+```{r meanpriceplot, echo=FALSE}
+knitr::include_graphics(here::here("plots", "mean_price_plot.png"))
+```
+
 As we have stated above, price observation is directly not possible for most of the uses. However, even the indirect calculation, after cleaning the exchange rate effects, requires further special royalty accounting know-how. The way royalties are accounted for and earned is different in the various sales formats of music. Mechanical royalties are paid upfront in lump sum, public performance royalties are paid per annum, and streaming royalties are accrued until reaching a threshold. In practice this means that many UK music business reported streaming income very difficult to connect to a consistent timeframe, geographic segment, and a proper weight of exchange rates. We there are many arguments for analysing music streaming within the geographical scope of a national UK market, we demonstrate that such an analysis is easier said than done. In our paper we draw the attention to computer simulations that we made for the Music Creators’ Earning report to show various pitfalls, particularly not considering the exchange rate effects of rightsholder income.
 
 In our experience, most music undertakings and their trade associations are not equipped with the data processing, accounting, or statistical capacity to adequately report revenues by geographical segments. This means that there is no easily verifiable source of the domestic, national and export income, and reliance on the industry’s internal reports, which are clearly not compiled for a competition law-based inquiry, is risky.
 
-Some of these problems are solved by the [Digital Music Observatory](https://music.dataobservatory.eu/), a working demo of the planned European Music Observatory is solving. It grew out of the Central & Eastern European Music Industry Databases (CEEMID) initiative in 2014, in which righthsolders from three countries attempted to solve this problem [@artisjus_measuring_2014]. By 2019, CEEMID had collected information on 20 European markets, including the United Kingdom, and processed data on far more markets---this data has been used in various competition law-based analysis and modelling outside of the United Kingdom.
+Some of these problems are solved by the [Digital Music Observatory](https://music.dataobservatory.eu/), a working demo of the planned European Music Observatory is solving. It grew out of the Central & Eastern European Music Industry Databases (CEEMID) initiative in 2014, in which righthsolders from three countries attempted to solve this problem [@artisjus_measuring_2014; @antal_growth_2017]. By 2019, CEEMID had collected information on 20 European markets, including the United Kingdom, and processed data on far more markets---this data has been used in various competition law-based analysis and modelling outside of the United Kingdom.
 
 The idea of this observatory was brought to the UK policy debate on music streaming by the observatory's only (former) British users, via the _Written evidence submitted by The state51 Music Group_ to the _Economics of music streaming review_ of the DCMS Committee [@dcms_state51_2020; @antal_ceereport_2020]. The *state51 music group*, through its distribution arm, has been supporting the creation of the largest ever European market report, the [Central European Music Industry Report](https://ceereport2020.ceemid.eu/), and supported the creation of the CEEMID-CI indexes, which, for the first time provided a stock-index type of view from an individual rightsholder’s perspective on volume and price movements in the UK and in other countries [@antal_ceereport_2020]. The state51 music group drew attention to the observatory approach and this work in the *Digital, Culture, Media and Sport Committee* (DCMS) Select Committee of the British House of Commons. The *Music Creator Earnings' Project*, that created the Intellectual Property Office's [Music Creator Earnings' in the Digital Era](https://www.gov.uk/government/publications/music-creators-earnings-in-the-digital-era) report individually contacted the Digital Music Observatory (successor of CEEMID) and state51, and eventually with the permission of state51, the project commissioned our report that re-uses the CEEMID-CI indexes. The MCE project also committed to share data in the Digital Music Observatory. 
 
@@ -144,6 +143,6 @@ We hope that our analytical framework can bring much clarity to the relative per
 
 This document is a work in progress. Please cite this version as:
 
-Daniel Antal. (2022). The Relevant Market for Music Streaming: Market Definition and Measurement Challenges  (Version 20220209). Zenodo. [https://doi.org/10.5281/zenodo.6026739](https://zenodo.org/record/6000537#.YgGcfurMLIV)
+Daniel Antal. (2022). The Relevant Market for Music Streaming: Market Definition and Measurement Challenges  (Version 20220215). Zenodo. [10.5281/zenodo.6088844](https://zenodo.org/record/6000537#.YgGcfurMLIV)
 
 Our refer to the Github repo: [https://github.com/dataobservatory-eu/music-competition](https://github.com/dataobservatory-eu/music-competition)
